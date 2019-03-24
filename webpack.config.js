@@ -1,7 +1,24 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const nodeExternals = require("webpack-node-externals");
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
-    entry: "./app/index.jsx",
+    target: "node",
+    externals: [nodeExternals()],
+    entry: "./server/index.js",
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        publicPath: "/dist/",
+        filename: "server.js",
+        library: "app",
+        libraryTarget: "commonjs2"
+    },
+    resolve: {
+        extensions: [".js", ".jsx"],
+        alias: {
+            components: path.resolve(__dirname, "..", "app/components")
+        }
+    },
     module: {
         rules: [
             {
@@ -14,9 +31,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebPackPlugin({
-        template: "./app/index.html",
-        filename: "./index.html"
-      })
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: `'production'`
+            }
+        })
     ]
 };

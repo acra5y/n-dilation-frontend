@@ -8,6 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "ssr": "NODE_ENV=production node ./dist/server.js",
     "build-dev": "webpack --mode development",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,7 +25,9 @@
     "webpack-cli": "^3.2.3"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react-dom": "^16.8.3",
+    "webpack-node-externals": "^1.7.2"
   }
 }
