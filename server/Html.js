@@ -8,10 +8,8 @@ export default (html) => `
             <title>App</title>
         </head>
         <body>
-            <section id="root">
-                ${html}
-            </section>
-        <script type="text/javascript" src="/public/main.js"></script>
+            <section id="root">${html}</section>
+            <script type="text/javascript" src="/public/main.js"></script>
         </body>
     </html>
 `;
