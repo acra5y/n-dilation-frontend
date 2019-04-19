@@ -8,7 +8,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "ssr": "NODE_ENV=production node ./dist/server.js",
+    "ssr": "npm run build-server && npm run build-dev && NODE_ENV=production node ./dist/server.js",
+    "build-server": "webpack --mode production --config server.production.js",
     "build-dev": "webpack --mode development",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"

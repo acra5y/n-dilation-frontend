@@ -1,23 +1,12 @@
-const nodeExternals = require("webpack-node-externals");
 const path = require("path");
-const webpack = require("webpack");
 
 module.exports = {
-    target: "node",
-    externals: [nodeExternals()],
-    entry: "./server/index.js",
+    entry: "./app/index.jsx",
     output: {
-        path: path.resolve(__dirname, "dist"),
-        publicPath: "/dist/",
-        filename: "server.js",
-        library: "app",
-        libraryTarget: "commonjs2"
-    },
-    resolve: {
-        extensions: [".js", ".jsx"],
-        alias: {
-            components: path.resolve(__dirname, "..", "app/components")
-        }
+        path: path.resolve(__dirname, "dist/public"),
+        publicPath: "/dist/public",
+        filename: "main.js",
+        library: "app"
     },
     module: {
         rules: [
@@ -30,11 +19,7 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: `'production'`
-            }
-        })
-    ]
+    resolve: {
+        extensions: [".js", ".jsx"]
+    }
 };
