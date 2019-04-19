@@ -11,7 +11,7 @@ export default (html) => `
             <section id="root">
                 ${html}
             </section>
-        <script src="/dist/client.js"></script>
+        <script type="text/javascript" src="/public/main.js"></script>
         </body>
     </html>
 `;
