@@ -15,7 +15,11 @@
     "build": "webpack --mode production",
     "lint": "./node_modules/.bin/eslint .",
     "prettier": "./node_modules/.bin/prettier --write \"{app,server}/**/*.js*\"",
-    "test": "./node_modules/.bin/jest"
+    "test": "npm run lint && npm run test:coverage",
+    "test:coverage": "./node_modules/.bin/jest --coverage",
+    "test:watch": "./node_modules/.bin/jest --watch",
+    "test:unit": "./node_modules/.bin/jest",
+    "test:updateSnapshots": "./node_modules/.bin/jest -u"
   },
   "author": "Olivier Schmelzle",
   "license": "MIT",
