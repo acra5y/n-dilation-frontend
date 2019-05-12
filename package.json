@@ -22,6 +22,7 @@
     "test:updateSnapshots": "./node_modules/.bin/jest -u"
   },
   "pre-commit": [
+    "prettier",
     "lint"
   ],
   "author": "Olivier Schmelzle",
