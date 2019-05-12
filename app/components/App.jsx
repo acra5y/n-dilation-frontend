@@ -1,5 +1,7 @@
 import React from "react";
 
-const App = () => <div>Tadaa 🥳</div>;
+import MatrixInput from "./nDilationComputer/MatrixInput";
+
+const App = () => <MatrixInput onSubmit={console.log} />;
 
 export default App;
