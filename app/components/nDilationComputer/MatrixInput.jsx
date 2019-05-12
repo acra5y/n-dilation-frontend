@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const matrixRegex = /^(([+-]?\d+(\.\d+)?),)*([+-]?\d+(\.\d+)?)$/;
 const isMatrix = matrixRegex.test.bind(matrixRegex);
+const isSquare = number => number > 0 && Math.sqrt(number) % 1 === 0;
 
 const MatrixInput = ({ onSubmit }) => {
     const [input, setInput] = useState("");
@@ -12,7 +13,11 @@ const MatrixInput = ({ onSubmit }) => {
                 ev.preventDefault();
 
                 if (isMatrix(input.replace(/\s/g, ""))) {
-                    onSubmit(JSON.parse(`[${input}]`));
+                    const parsed = JSON.parse(`[${input}]`);
+
+                    if (isSquare(parsed.length)) {
+                        onSubmit(parsed);
+                    }
                 }
             }}
         >

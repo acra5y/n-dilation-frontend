@@ -42,6 +42,17 @@ describe("MatrixInput", () => {
         expect(defaultProps.onSubmit.mock.calls.length).toBe(0);
     });
 
+    it("should not call onSubmit if input is not s square matrix", () => {
+        const component = render();
+
+        component
+            .find("textarea")
+            .simulate("change", { target: { value: "1,2,3" } });
+        component.find("form").simulate("submit", defaultSubmitEvent);
+
+        expect(defaultProps.onSubmit.mock.calls.length).toBe(0);
+    });
+
     it("should pass value from textarea to onSubmit if it is a matrix", () => {
         const component = render();
 
