@@ -20,14 +20,6 @@ describe("MatrixInput", () => {
         expect(component.exists("form")).toEqual(true);
     });
 
-    it("should call onSubmit from props", () => {
-        const component = render();
-
-        component.find("form").simulate("submit", defaultSubmitEvent);
-
-        expect(defaultProps.onSubmit.mock.calls.length).toBe(1);
-    });
-
     it("should render a label", () => {
         const component = render();
 
@@ -42,14 +34,23 @@ describe("MatrixInput", () => {
         expect(component.find("textarea").prop("name")).toEqual("matrix-input");
     });
 
-    it("should pass value from textarea to onSubmit", () => {
+    it("should not call onSubmit from props if input is not a matrix", () => {
+        const component = render();
+
+        component.find("form").simulate("submit", defaultSubmitEvent);
+
+        expect(defaultProps.onSubmit.mock.calls.length).toBe(0);
+    });
+
+    it("should pass value from textarea to onSubmit if it is a matrix", () => {
         const component = render();
 
         component
             .find("textarea")
-            .simulate("change", { target: { value: "my-input" } });
+            .simulate("change", { target: { value: "1.5,-2,\n3,4" } });
         component.find("form").simulate("submit", defaultSubmitEvent);
 
-        expect(defaultProps.onSubmit.mock.calls[0][0]).toEqual("my-input");
+        expect(defaultProps.onSubmit.mock.calls.length).toBe(1);
+        expect(defaultProps.onSubmit.mock.calls[0][0]).toEqual([1.5, -2, 3, 4]);
     });
 });
