@@ -13,7 +13,7 @@
     "build-server": "webpack --mode production --config server.production.js",
     "build-dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
-    "lint": "./node_modules/.bin/eslint .",
+    "lint": "./node_modules/.bin/eslint . --ext .jsx --ext .js",
     "prettier": "./node_modules/.bin/prettier --write \"{app,server}/**/*.js*\"",
     "test": "npm run lint && npm run test:coverage",
     "test:coverage": "./node_modules/.bin/jest --coverage",
