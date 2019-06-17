@@ -1,8 +1,7 @@
 import React from "react";
 
-import MatrixInput from "./nDilationComputer/MatrixInput";
+import Calculator from "./nDilation/Calculator";
 
-//eslint-disable-next-line no-console
-const App = () => <MatrixInput onSubmit={console.log} />;
+const App = () => <Calculator />;
 
 export default App;
