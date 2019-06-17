@@ -4,6 +4,9 @@
 module.exports = {
     clearMocks: true,
     coverageDirectory: "coverage",
+    globals: {
+        window: {}
+    },
     setupFilesAfterEnv: ["<rootDir>setupTests.js"],
     snapshotSerializers: ["enzyme-to-json/serializer"],
     testEnvironment: "node",
