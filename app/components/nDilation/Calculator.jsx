@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import fetchNDilation from "../../lib/fetchNDilation";
+import { useWindowContext } from "../WindowContext";
 import MatrixInput from "./MatrixInput";
 
 const createOnSubmitHandler = (fetch, setDilation) => async matrix => {
@@ -14,11 +15,15 @@ const createOnSubmitHandler = (fetch, setDilation) => async matrix => {
 
 const Calculator = () => {
     const [dilation, setDilation] = useState(null); //eslint-disable-line no-unused-vars
-    const onSubmit =
-        typeof window !== "undefined" &&
-        createOnSubmitHandler(window.fetch, setDilation); //eslint-disable-line no-undef
+    const window = useWindowContext();
 
-    return <MatrixInput onSubmit={onSubmit} />;
+    return (
+        <MatrixInput
+            onSubmit={
+                window && createOnSubmitHandler(window.fetch, setDilation)
+            }
+        />
+    );
 };
 
 export default Calculator;
