@@ -14,15 +14,18 @@ const createOnSubmitHandler = (fetch, setDilation) => async matrix => {
 };
 
 const Calculator = () => {
-    const [dilation, setDilation] = useState(null); //eslint-disable-line no-unused-vars
+    const [dilation, setDilation] = useState(null);
     const window = useWindowContext();
 
     return (
-        <MatrixInput
-            onSubmit={
-                window && createOnSubmitHandler(window.fetch, setDilation)
-            }
-        />
+        <div>
+            <MatrixInput
+                onSubmit={
+                    window && createOnSubmitHandler(window.fetch, setDilation)
+                }
+            />
+            {dilation && <div>{JSON.stringify(dilation)}</div>}
+        </div>
     );
 };
 

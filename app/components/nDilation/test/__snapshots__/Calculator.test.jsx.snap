@@ -1,7 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Calculator on client should not throw an exception if the fetch is not ok 1`] = `
+<div>
+  <MatrixInput
+    onSubmit={[Function]}
+  />
+</div>
+`;
+
+exports[`Calculator on client should render the dilation after is has been fetched 1`] = `
+<div>
+  <MatrixInput
+    onSubmit={[Function]}
+  />
+  <div>
+    [1,2,3,4]
+  </div>
+</div>
+`;
+
 exports[`Calculator should render 1`] = `
-<MatrixInput
-  onSubmit={[Function]}
-/>
+<div>
+  <MatrixInput
+    onSubmit={[Function]}
+  />
+</div>
 `;
