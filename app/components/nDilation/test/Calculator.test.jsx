@@ -9,9 +9,10 @@ const createWindow = (
     response = {
         ok: true,
         json: () => Promise.resolve({}),
-    }
+    },
+    fetch = jest.fn(() => Promise.resolve(response))
 ) => ({
-    fetch: jest.fn(() => Promise.resolve(response)),
+    fetch,
 });
 const render = (window = {}) => {
     jest.spyOn(WindowContext, "useWindowContext").mockImplementation(
@@ -55,6 +56,15 @@ describe("Calculator", () => {
                 ok: false,
             };
             const component = render(createWindow(response));
+            await component.find(MatrixInput).prop("onSubmit")();
+            expect(component).toMatchSnapshot();
+        });
+
+        it("should catch an exception thrown by fetch", async () => {
+            const fetch = jest.fn(() =>
+                Promise.reject(new Error("Mock Error"))
+            );
+            const component = render(createWindow(null, fetch));
             await component.find(MatrixInput).prop("onSubmit")();
             expect(component).toMatchSnapshot();
         });
