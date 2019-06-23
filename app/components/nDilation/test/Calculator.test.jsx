@@ -5,12 +5,19 @@ import MatrixInput from "../MatrixInput";
 import * as WindowContext from "../../WindowContext";
 import Calculator from "../Calculator";
 
+const render = (window = {}) => {
+    jest.spyOn(WindowContext, "useWindowContext").mockImplementation(
+        () => window
+    );
+    return shallow(<Calculator />);
+};
+
 describe("Calculator", () => {
     it("should render", () => {
         jest.spyOn(WindowContext, "useWindowContext").mockImplementation(
             () => ({})
         );
-        const component = shallow(<Calculator />);
+        const component = render();
 
         expect(component).toMatchSnapshot();
     });
@@ -24,10 +31,7 @@ describe("Calculator", () => {
             const window = {
                 fetch: jest.fn(() => Promise.resolve(response)),
             };
-            jest.spyOn(WindowContext, "useWindowContext").mockImplementation(
-                () => window
-            );
-            const component = shallow(<Calculator />);
+            const component = render(window);
 
             await component.find(MatrixInput).prop("onSubmit")();
 
