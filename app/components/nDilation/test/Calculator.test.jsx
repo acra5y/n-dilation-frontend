@@ -68,5 +68,14 @@ describe("Calculator", () => {
             await component.find(MatrixInput).prop("onSubmit")();
             expect(component).toMatchSnapshot();
         });
+
+        it("should not render dilation from a first fetch if a second fetch throws", async () => {
+            const window = createWindow();
+            const component = render(window);
+            await component.find(MatrixInput).prop("onSubmit")();
+            window.fetch.mockImplementation(() => Promise.reject(new Error("Mock Error")));
+            await component.find(MatrixInput).prop("onSubmit")();
+            expect(component).toMatchSnapshot();
+        });
     });
 });
