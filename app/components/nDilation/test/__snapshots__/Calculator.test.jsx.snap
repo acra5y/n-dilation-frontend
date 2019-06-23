@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Calculator on client should catch an exception thrown by fetch 1`] = `
+<div>
+  <MatrixInput
+    onSubmit={[Function]}
+  />
+  <div>
+    Ooops, something went terribly wrong 🤯
+  </div>
+</div>
+`;
+
 exports[`Calculator on client should not throw an exception if the fetch is not ok 1`] = `
 <div>
   <MatrixInput
