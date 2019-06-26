@@ -3,6 +3,7 @@ import React, { useReducer } from "react";
 import fetchNDilation from "../../lib/fetchNDilation";
 import { useWindowContext } from "../WindowContext";
 import MatrixInput from "./MatrixInput";
+import ErrorMessage from "./ErrorMessage";
 
 const initialState = { dilation: null, error: null };
 
@@ -42,7 +43,7 @@ const Calculator = () => {
                 }
             />
             {dilation && <div>{JSON.stringify(dilation)}</div>}
-            {error && <div>Ooops, something went terribly wrong 🤯</div>}
+            {error && <ErrorMessage />}
         </div>
     );
 };

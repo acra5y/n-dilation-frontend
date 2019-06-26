@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorMessage should render 1`] = `
+<div>
+  Ooops, something went terribly wrong 🤯
+</div>
+`;
