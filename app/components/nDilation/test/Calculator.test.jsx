@@ -65,7 +65,9 @@ describe("Calculator", () => {
                 };
                 const component = render(createWindow(response));
                 await component.find(MatrixInput).prop("onSubmit")();
-                expect(component.find(ErrorMessage).exists()).toEqual(true);
+                expect(
+                    component.find(ErrorMessage).prop("errorDetails")
+                ).toEqual(responseBody);
             });
 
             it("and catch an exception thrown by fetch", async () => {
@@ -73,7 +75,9 @@ describe("Calculator", () => {
                 const fetch = jest.fn(() => Promise.reject(error));
                 const component = render(createWindow(null, fetch));
                 await component.find(MatrixInput).prop("onSubmit")();
-                expect(component.find(ErrorMessage).exists()).toEqual(true);
+                expect(
+                    component.find(ErrorMessage).prop("errorDetails")
+                ).toEqual(error);
             });
 
             it("and not render dilation from a first fetch if a second fetch throws", async () => {
