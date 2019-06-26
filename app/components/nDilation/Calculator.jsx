@@ -9,8 +9,10 @@ const initialState = { dilation: null, error: null };
 
 function reducer(state, action) {
     switch (action.type) {
-        case "FETCH_SUCCESS":
+        case "FETCH_OK":
             return { dilation: action.payload, error: null };
+        case "FETCH_NOT_OK":
+            return { dilation: null, error: action.payload };
         case "FETCH_ERROR":
             return { dilation: null, error: action.payload };
         default:
@@ -22,9 +24,11 @@ const createOnSubmitHandler = (fetch, dispatch) => async matrix => {
     try {
         const response = await fetchNDilation(fetch, matrix);
 
+        const body = await response.json();
         if (response.ok) {
-            const body = await response.json();
-            dispatch({ type: "FETCH_SUCCESS", payload: body.value });
+            dispatch({ type: "FETCH_OK", payload: body.value });
+        } else {
+            dispatch({ type: "FETCH_NOT_OK", payload: body });
         }
     } catch (e) {
         dispatch({ type: "FETCH_ERROR", payload: e });
