@@ -54,12 +54,18 @@ describe("Calculator", () => {
 
         describe("should handle errors", () => {
             it("and not throw an exception if the fetch is not ok", async () => {
+                const responseBody = {
+                    validationError: {
+                        value: ["value must represent a real contraction"],
+                    },
+                };
                 const response = {
                     ok: false,
+                    json: () => Promise.resolve(responseBody),
                 };
                 const component = render(createWindow(response));
                 await component.find(MatrixInput).prop("onSubmit")();
-                expect(component).toMatchSnapshot();
+                expect(component.find(ErrorMessage).exists()).toEqual(true);
             });
 
             it("and catch an exception thrown by fetch", async () => {

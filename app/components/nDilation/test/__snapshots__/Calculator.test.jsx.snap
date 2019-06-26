@@ -9,14 +9,6 @@ exports[`Calculator on client should handle errors and not render dilation from 
 </div>
 `;
 
-exports[`Calculator on client should handle errors and not throw an exception if the fetch is not ok 1`] = `
-<div>
-  <MatrixInput
-    onSubmit={[Function]}
-  />
-</div>
-`;
-
 exports[`Calculator on client should render the dilation after is has been fetched 1`] = `
 <div>
   <MatrixInput
