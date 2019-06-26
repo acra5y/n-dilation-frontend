@@ -5,3 +5,9 @@ exports[`ErrorMessage should render 1`] = `
   Ooops, something went terribly wrong 🤯
 </div>
 `;
+
+exports[`ErrorMessage should render error message for validation errors 1`] = `
+<div>
+  This did not work. Are you sure, your matrix is a square contraction with real numbers? 🤔
+</div>
+`;

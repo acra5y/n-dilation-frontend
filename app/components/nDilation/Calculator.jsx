@@ -47,7 +47,7 @@ const Calculator = () => {
                 }
             />
             {dilation && <div>{JSON.stringify(dilation)}</div>}
-            {error && <ErrorMessage />}
+            {error && <ErrorMessage errorDetails={error} />}
         </div>
     );
 };

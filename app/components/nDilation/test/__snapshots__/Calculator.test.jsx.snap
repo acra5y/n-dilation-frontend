@@ -5,7 +5,9 @@ exports[`Calculator on client should handle errors and not render dilation from 
   <MatrixInput
     onSubmit={[Function]}
   />
-  <ErrorMessage />
+  <ErrorMessage
+    errorDetails={[Error: Mock Error]}
+  />
 </div>
 `;
 
