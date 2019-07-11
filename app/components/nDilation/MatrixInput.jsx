@@ -8,6 +8,18 @@ const TextareaWrapper = styled.div`
     border-radius: 3px;
     box-shadow: 0 0 2px 2px #4c8f11;
 `;
+TextareaWrapper.displayName = "TextareaWrapper";
+
+const Textarea = styled.textarea`
+    border: 2px solid #cde843;
+    border-radius: 3px;
+
+    &:hover,
+    &:focus {
+        border-color: #fae56b;
+    }
+`;
+Textarea.displayName = "Textarea";
 
 const matrixRegex = /^(([+-]?\d+(\.\d+)?),)*([+-]?\d+(\.\d+)?)$/;
 const isMatrix = matrixRegex.test.bind(matrixRegex);
@@ -32,7 +44,7 @@ const MatrixInput = ({ onSubmit }) => {
         >
             <label htmlFor="matrix-input">Enter Matrix</label>
             <TextareaWrapper>
-                <textarea
+                <Textarea
                     name="matrix-input"
                     type="text"
                     onChange={ev => setInput(ev.target.value)}
