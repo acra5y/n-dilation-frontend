@@ -1,5 +1,4 @@
 import express from "express";
-// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { renderToString } from "react-dom/server";
 import path from "path";
