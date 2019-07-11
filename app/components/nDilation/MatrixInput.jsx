@@ -1,4 +1,13 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const TextareaWrapper = styled.div`
+    display: inline-block;
+    background-color: #4c8f11;
+    padding: 2px;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px #4c8f11;
+`;
 
 const matrixRegex = /^(([+-]?\d+(\.\d+)?),)*([+-]?\d+(\.\d+)?)$/;
 const isMatrix = matrixRegex.test.bind(matrixRegex);
@@ -22,12 +31,14 @@ const MatrixInput = ({ onSubmit }) => {
             }}
         >
             <label htmlFor="matrix-input">Enter Matrix</label>
-            <textarea
-                name="matrix-input"
-                type="text"
-                onChange={ev => setInput(ev.target.value)}
-                autoFocus
-            />
+            <TextareaWrapper>
+                <textarea
+                    name="matrix-input"
+                    type="text"
+                    onChange={ev => setInput(ev.target.value)}
+                    autoFocus
+                />
+            </TextareaWrapper>
             <input type="submit" value="Compute" />
         </form>
     );
