@@ -49,6 +49,8 @@ const MatrixInput = ({ onSubmit }) => {
                     type="text"
                     onChange={ev => setInput(ev.target.value)}
                     autoFocus
+                    rows={2}
+                    placeholder="0, 0.5, 0, 0"
                 />
             </TextareaWrapper>
             <input type="submit" value="Compute" />
