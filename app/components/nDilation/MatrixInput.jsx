@@ -26,6 +26,7 @@ const MatrixInput = ({ onSubmit }) => {
                 name="matrix-input"
                 type="text"
                 onChange={ev => setInput(ev.target.value)}
+                autoFocus
             />
             <input type="submit" value="Compute" />
         </form>
