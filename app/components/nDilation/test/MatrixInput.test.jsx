@@ -23,8 +23,10 @@ describe("MatrixInput", () => {
     it("should render a label", () => {
         const component = render();
 
-        expect(component.exists("label")).toEqual(true);
-        expect(component.find("label").prop("htmlFor")).toEqual("matrix-input");
+        expect(component.exists("StyledLabel")).toEqual(true);
+        expect(component.find("StyledLabel").prop("htmlFor")).toEqual(
+            "matrix-input"
+        );
     });
 
     it("should render a textarea", () => {
