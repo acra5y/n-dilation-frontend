@@ -30,8 +30,9 @@ describe("MatrixInput", () => {
     it("should render a textarea", () => {
         const component = render();
 
-        expect(component.exists("Textarea")).toEqual(true);
-        expect(component.find("Textarea").prop("name")).toEqual("matrix-input");
+        expect(component.find("StyledTextarea").prop("name")).toEqual(
+            "matrix-input"
+        );
     });
 
     it("should not call onSubmit from props if input is not a matrix", () => {
@@ -46,7 +47,7 @@ describe("MatrixInput", () => {
         const component = render();
 
         component
-            .find("Textarea")
+            .find("StyledTextarea")
             .simulate("change", { target: { value: "1,2,3" } });
         component.find("form").simulate("submit", defaultSubmitEvent);
 
@@ -57,7 +58,7 @@ describe("MatrixInput", () => {
         const component = render();
 
         component
-            .find("Textarea")
+            .find("StyledTextarea")
             .simulate("change", { target: { value: "1.5,-2,\n3,4" } });
         component.find("form").simulate("submit", defaultSubmitEvent);
 
