@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const darkGreen = "#4c8f11";
+const marginBetweenFormElements = "margin: 8px;";
 
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
 `;
 StyledForm.displayName = "StyledForm";
 
@@ -15,8 +17,14 @@ const TextareaWrapper = styled.div`
     padding: 2px;
     border-radius: 3px;
     box-shadow: 0 0 2px 2px ${darkGreen};
+    ${marginBetweenFormElements}
 `;
 TextareaWrapper.displayName = "TextareaWrapper";
+
+const StyledLabel = styled.label`
+    ${marginBetweenFormElements}
+`;
+StyledLabel.displayName = "StyledLabel";
 
 const StyledTextarea = styled.textarea`
     border: 2px solid #cde843;
@@ -34,6 +42,7 @@ const StyledInput = styled.input`
     border: 2px solid ${darkGreen};
     box-shadow: 0 0 1px 1px ${darkGreen};
     padding 2px 7px;
+    ${marginBetweenFormElements}
 `;
 StyledInput.displayName = "StyledInput";
 
@@ -58,7 +67,7 @@ const MatrixInput = ({ onSubmit }) => {
                 }
             }}
         >
-            <label htmlFor="matrix-input">Enter Matrix</label>
+            <StyledLabel htmlFor="matrix-input">Enter Matrix</StyledLabel>
             <TextareaWrapper>
                 <StyledTextarea
                     name="matrix-input"
