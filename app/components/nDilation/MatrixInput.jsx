@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+StyledForm.displayName = "StyledForm";
+
 const TextareaWrapper = styled.div`
-    display: inline-block;
     background-color: #4c8f11;
     padding: 2px;
     border-radius: 3px;
@@ -29,7 +35,7 @@ const MatrixInput = ({ onSubmit }) => {
     const [input, setInput] = useState("");
 
     return (
-        <form
+        <StyledForm
             onSubmit={ev => {
                 ev.preventDefault();
 
@@ -54,7 +60,7 @@ const MatrixInput = ({ onSubmit }) => {
                 />
             </TextareaWrapper>
             <input type="submit" value="Compute" />
-        </form>
+        </StyledForm>
     );
 };
 
