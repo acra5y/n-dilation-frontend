@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+const darkGreen = "#4c8f11";
+
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
@@ -9,10 +11,10 @@ const StyledForm = styled.form`
 StyledForm.displayName = "StyledForm";
 
 const TextareaWrapper = styled.div`
-    background-color: #4c8f11;
+    background-color: ${darkGreen};
     padding: 2px;
     border-radius: 3px;
-    box-shadow: 0 0 2px 2px #4c8f11;
+    box-shadow: 0 0 2px 2px ${darkGreen};
 `;
 TextareaWrapper.displayName = "TextareaWrapper";
 
@@ -26,6 +28,14 @@ const StyledTextarea = styled.textarea`
     }
 `;
 StyledTextarea.displayName = "StyledTextarea";
+
+const StyledInput = styled.input`
+    border-radius 18px;
+    border: 2px solid ${darkGreen};
+    box-shadow: 0 0 1px 1px ${darkGreen};
+    padding 2px 7px;
+`;
+StyledInput.displayName = "StyledInput";
 
 const matrixRegex = /^(([+-]?\d+(\.\d+)?),)*([+-]?\d+(\.\d+)?)$/;
 const isMatrix = matrixRegex.test.bind(matrixRegex);
@@ -59,7 +69,7 @@ const MatrixInput = ({ onSubmit }) => {
                     placeholder="0, 0.5, 0, 0"
                 />
             </TextareaWrapper>
-            <input type="submit" value="Compute" />
+            <StyledInput type="submit" value="Compute" />
         </StyledForm>
     );
 };
