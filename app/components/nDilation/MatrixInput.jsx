@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import TextAreaAutosize from "react-textarea-autosize";
 
 const darkGreen = "#4c8f11";
 const marginBetweenFormElements = "margin: 8px;";
@@ -18,6 +19,18 @@ const TextareaWrapper = styled.div`
     border-radius: 3px;
     box-shadow: 0 0 2px 2px ${darkGreen};
     ${marginBetweenFormElements}
+
+    & > textarea {
+        border: 2px solid #cde843;
+        border-radius: 3px;
+        min-height: 2rem;
+        transition: height ease-out 0.1s;
+
+        &:hover,
+        &:focus {
+            border-color: #fae56b;
+        }
+    }
 `;
 TextareaWrapper.displayName = "TextareaWrapper";
 
@@ -25,17 +38,6 @@ const StyledLabel = styled.label`
     ${marginBetweenFormElements}
 `;
 StyledLabel.displayName = "StyledLabel";
-
-const StyledTextarea = styled.textarea`
-    border: 2px solid #cde843;
-    border-radius: 3px;
-
-    &:hover,
-    &:focus {
-        border-color: #fae56b;
-    }
-`;
-StyledTextarea.displayName = "StyledTextarea";
 
 const StyledInput = styled.input`
     border-radius 18px;
@@ -69,12 +71,12 @@ const MatrixInput = ({ onSubmit }) => {
         >
             <StyledLabel htmlFor="matrix-input">Enter Matrix</StyledLabel>
             <TextareaWrapper>
-                <StyledTextarea
+                <TextAreaAutosize
                     name="matrix-input"
                     type="text"
                     onChange={ev => setInput(ev.target.value)}
                     autoFocus
-                    rows={2}
+                    minRows={2}
                     placeholder="0, 0.5, 0, 0"
                 />
             </TextareaWrapper>
