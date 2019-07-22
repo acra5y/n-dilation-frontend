@@ -40,10 +40,10 @@ const StyledLabel = styled.label`
 StyledLabel.displayName = "StyledLabel";
 
 const StyledInput = styled.input`
-    border-radius 18px;
+    border-radius: 18px;
     border: 2px solid ${darkGreen};
     box-shadow: 0 0 1px 1px ${darkGreen};
-    padding 2px 7px;
+    padding: 2px 7px;
     ${marginBetweenFormElements}
 `;
 StyledInput.displayName = "StyledInput";
