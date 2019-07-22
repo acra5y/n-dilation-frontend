@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
+import TextAreaAutosize from "react-textarea-autosize";
 
 import MatrixInput from "../MatrixInput";
 
@@ -32,7 +33,7 @@ describe("MatrixInput", () => {
     it("should render a textarea", () => {
         const component = render();
 
-        expect(component.find("StyledTextarea").prop("name")).toEqual(
+        expect(component.find(TextAreaAutosize).prop("name")).toEqual(
             "matrix-input"
         );
     });
@@ -49,7 +50,7 @@ describe("MatrixInput", () => {
         const component = render();
 
         component
-            .find("StyledTextarea")
+            .find(TextAreaAutosize)
             .simulate("change", { target: { value: "1,2,3" } });
         component.find("StyledForm").simulate("submit", defaultSubmitEvent);
 
@@ -60,7 +61,7 @@ describe("MatrixInput", () => {
         const component = render();
 
         component
-            .find("StyledTextarea")
+            .find(TextAreaAutosize)
             .simulate("change", { target: { value: "1.5,-2,\n3,4" } });
         component.find("StyledForm").simulate("submit", defaultSubmitEvent);
 
