@@ -3,6 +3,8 @@ import styled from "styled-components";
 import TextAreaAutosize from "react-textarea-autosize";
 
 const darkGreen = "#4c8f11";
+const lightGreen = "#cde843";
+const yellow = "#fae56b";
 const marginBetweenFormElements = "margin: 8px;";
 
 const StyledForm = styled.form`
@@ -21,14 +23,14 @@ const TextareaWrapper = styled.div`
     ${marginBetweenFormElements}
 
     & > textarea {
-        border: 2px solid #cde843;
+        border: 2px solid ${lightGreen};
         border-radius: 3px;
         min-height: 2rem;
         transition: height ease-out 0.1s;
 
         &:hover,
         &:focus {
-            border-color: #fae56b;
+            border-color: ${yellow};
         }
     }
 `;
@@ -45,6 +47,17 @@ const StyledInput = styled.input`
     box-shadow: 0 0 1px 1px ${darkGreen};
     padding: 2px 7px;
     ${marginBetweenFormElements}
+
+    &:hover {
+        cursor: pointer;
+        border-color: ${lightGreen};
+    }
+
+    &:active,
+    &:focus {
+        cursor: pointer;
+        border-color: ${yellow};
+    }
 `;
 StyledInput.displayName = "StyledInput";
 
