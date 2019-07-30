@@ -3,7 +3,7 @@ import React, { useReducer } from "react";
 import fetchNDilation from "../../lib/fetchNDilation";
 import { useWindowContext } from "../WindowContext";
 import MatrixInput from "./MatrixInput";
-import ErrorMessage from "./ErrorMessage";
+import Result from "./Result";
 
 const initialState = { dilation: null, error: null };
 
@@ -46,8 +46,7 @@ const Calculator = () => {
                     window && createOnSubmitHandler(window.fetch, dispatch)
                 }
             />
-            {dilation && <div>{JSON.stringify(dilation)}</div>}
-            {error && <ErrorMessage errorDetails={error} />}
+            <Result errorDetails={error} dilation={dilation} />
         </div>
     );
 };

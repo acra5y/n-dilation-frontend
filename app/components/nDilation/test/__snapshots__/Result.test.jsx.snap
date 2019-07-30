@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Result component should render correct markup dilation and errorDetail props are defined 1`] = `
+<Fragment>
+  <div>
+    [1,2,3,4]
+  </div>
+  <ErrorMessage
+    errorDetails={[Error: Test-Error]}
+  />
+</Fragment>
+`;
+
+exports[`Result component should render correct markup dilation prop is defined 1`] = `
+<Fragment>
+  <div>
+    [1,2,3,4]
+  </div>
+</Fragment>
+`;
+
+exports[`Result component should render correct markup errorDetail props is defined 1`] = `
+<Fragment>
+  <ErrorMessage
+    errorDetails={[Error: Test-Error]}
+  />
+</Fragment>
+`;
+
+exports[`Result component should render correct markup when error and dilation are undefined 1`] = `<Fragment />`;
