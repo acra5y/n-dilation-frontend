@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import MatrixInput from "../MatrixInput";
-import ErrorMessage from "../ErrorMessage";
+import Result from "../Result";
 import * as WindowContext from "../../WindowContext";
 import Calculator from "../Calculator";
 
@@ -43,13 +43,14 @@ describe("Calculator", () => {
         });
 
         it("should render the dilation after is has been fetched", async () => {
+            const dilation = [1, 2, 3, 4];
             const response = {
                 ok: true,
-                json: () => Promise.resolve({ value: [1, 2, 3, 4] }),
+                json: () => Promise.resolve({ value: dilation }),
             };
             const component = render(createWindow(response));
             await component.find(MatrixInput).prop("onSubmit")();
-            expect(component).toMatchSnapshot();
+            expect(component.find(Result).prop("dilation")).toEqual(dilation);
         });
 
         describe("should handle errors", () => {
@@ -65,9 +66,9 @@ describe("Calculator", () => {
                 };
                 const component = render(createWindow(response));
                 await component.find(MatrixInput).prop("onSubmit")();
-                expect(
-                    component.find(ErrorMessage).prop("errorDetails")
-                ).toEqual(responseBody);
+                expect(component.find(Result).prop("errorDetails")).toEqual(
+                    responseBody
+                );
             });
 
             it("and catch an exception thrown by fetch", async () => {
@@ -75,20 +76,23 @@ describe("Calculator", () => {
                 const fetch = jest.fn(() => Promise.reject(error));
                 const component = render(createWindow(null, fetch));
                 await component.find(MatrixInput).prop("onSubmit")();
-                expect(
-                    component.find(ErrorMessage).prop("errorDetails")
-                ).toEqual(error);
+                expect(component.find(Result).prop("errorDetails")).toEqual(
+                    error
+                );
             });
 
             it("and not render dilation from a first fetch if a second fetch throws", async () => {
                 const window = createWindow();
                 const component = render(window);
                 await component.find(MatrixInput).prop("onSubmit")();
+                const mockError = new Error("Mock Error");
                 window.fetch.mockImplementation(() =>
-                    Promise.reject(new Error("Mock Error"))
+                    Promise.reject(mockError)
                 );
                 await component.find(MatrixInput).prop("onSubmit")();
-                expect(component).toMatchSnapshot();
+                const result = component.find(Result);
+                expect(result.prop("dilation")).toBe(null);
+                expect(result.prop("errorDetails")).toEqual(mockError);
             });
         });
     });
