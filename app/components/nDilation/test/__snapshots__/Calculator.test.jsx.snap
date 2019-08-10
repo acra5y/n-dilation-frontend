@@ -5,7 +5,7 @@ exports[`Calculator should render 1`] = `
   <MatrixInput
     onSubmit={[Function]}
   />
-  <Result
+  <withAnimatedContentChange(Result)
     dilation={null}
     errorDetails={null}
   />
