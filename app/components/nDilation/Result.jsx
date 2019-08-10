@@ -5,6 +5,7 @@ import withAnimatedContentChange from "../withAnimatedContentChange";
 import ErrorMessage from "./ErrorMessage";
 
 const AnimatedContentTransition = styled.div`
+    text-align: center;
     transition: ${props => `opacity ${props.animationTimeInSeconds}s ease-out`};
     opacity: ${props => props.opacity};
 `;
