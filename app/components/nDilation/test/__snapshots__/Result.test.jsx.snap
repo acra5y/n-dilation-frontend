@@ -2,14 +2,16 @@
 
 exports[`Result component should render correct markup dilation and errorDetail props are defined 1`] = `
 <Result__AnimatedContentTransition>
-  <div>
-    [
- 1,
- 2,
- 3,
- 4
-]
-  </div>
+  <_default
+    matrixInRowMajorOrder={
+      Array [
+        1,
+        2,
+        3,
+        4,
+      ]
+    }
+  />
   <ErrorMessage
     errorDetails={[Error: Test-Error]}
   />
@@ -18,14 +20,16 @@ exports[`Result component should render correct markup dilation and errorDetail 
 
 exports[`Result component should render correct markup dilation prop is defined 1`] = `
 <Result__AnimatedContentTransition>
-  <div>
-    [
- 1,
- 2,
- 3,
- 4
-]
-  </div>
+  <_default
+    matrixInRowMajorOrder={
+      Array [
+        1,
+        2,
+        3,
+        4,
+      ]
+    }
+  />
 </Result__AnimatedContentTransition>
 `;
 

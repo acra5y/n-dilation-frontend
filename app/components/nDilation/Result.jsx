@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import withAnimatedContentChange from "../withAnimatedContentChange";
+import Matrix from "./Matrix";
 import ErrorMessage from "./ErrorMessage";
 
 const AnimatedContentTransition = styled.div`
@@ -21,7 +22,7 @@ export const Result = ({
             opacity={opacity}
             animationTimeInSeconds={animationTimeInSeconds}
         >
-            {dilation && <div>{JSON.stringify(dilation, null, 1)}</div>}
+            {dilation && <Matrix matrixInRowMajorOrder={dilation} />}
             {errorDetails && <ErrorMessage errorDetails={errorDetails} />}
         </AnimatedContentTransition>
     );
