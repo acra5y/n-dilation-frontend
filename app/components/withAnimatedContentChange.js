@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useEffect, useReducer } from "react";
-import styled from "styled-components";
 
 const animationTimeInSeconds = 0.1;
 
