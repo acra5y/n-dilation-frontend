@@ -8,6 +8,7 @@ exports[`Calculator should render 1`] = `
   <withAnimatedContentChange(Result)
     dilation={null}
     errorDetails={null}
+    isLoading={false}
   />
 </div>
 `;

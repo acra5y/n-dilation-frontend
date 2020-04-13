@@ -5,16 +5,18 @@ import { useWindowContext } from "../WindowContext";
 import MatrixInput from "./MatrixInput";
 import Result from "./Result";
 
-const initialState = { dilation: null, error: null };
+const initialState = { isLoading: false, dilation: null, error: null };
 
 function reducer(state, action) {
     switch (action.type) {
+        case "FETCH_START":
+            return { isLoading: true, dilation: null, error: null };
         case "FETCH_OK":
-            return { dilation: action.payload, error: null };
+            return { isLoading: false, dilation: action.payload, error: null };
         case "FETCH_NOT_OK":
-            return { dilation: null, error: action.payload };
+            return { isLoading: false, dilation: null, error: action.payload };
         case "FETCH_ERROR":
-            return { dilation: null, error: action.payload };
+            return { isLoading: false, dilation: null, error: action.payload };
         default:
             return state;
     }
@@ -22,9 +24,11 @@ function reducer(state, action) {
 
 const createOnSubmitHandler = (fetch, dispatch) => async matrix => {
     try {
+        dispatch({ type: "FETCH_START" });
         const response = await fetchNDilation(fetch, matrix);
 
         const body = await response.json();
+
         if (response.ok) {
             dispatch({ type: "FETCH_OK", payload: body.value });
         } else {
@@ -36,7 +40,10 @@ const createOnSubmitHandler = (fetch, dispatch) => async matrix => {
 };
 
 const Calculator = () => {
-    const [{ dilation, error }, dispatch] = useReducer(reducer, initialState);
+    const [{ isLoading, dilation, error }, dispatch] = useReducer(
+        reducer,
+        initialState
+    );
     const window = useWindowContext();
 
     return (
@@ -46,7 +53,11 @@ const Calculator = () => {
                     window && createOnSubmitHandler(window.fetch, dispatch)
                 }
             />
-            <Result errorDetails={error} dilation={dilation} />
+            <Result
+                isLoading={isLoading}
+                errorDetails={error}
+                dilation={dilation}
+            />
         </div>
     );
 };

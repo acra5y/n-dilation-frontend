@@ -11,6 +11,10 @@ describe("Result component", () => {
                 "should render correct markup when error and dilation are undefined",
         },
         {
+            props: { isLoading: true },
+            description: "should render correct markup when isLoading is true",
+        },
+        {
             props: { dilation: [1, 2, 3, 4] },
             description:
                 "should render correct markup dilation prop is defined",

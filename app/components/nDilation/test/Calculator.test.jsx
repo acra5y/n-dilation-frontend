@@ -42,6 +42,26 @@ describe("Calculator", () => {
             expect(window.fetch.mock.calls.length).toEqual(1);
         });
 
+        it("should set isLoading prop during fetch", async () => {
+            const response = {
+                ok: false,
+                json: () => Promise.resolve({}),
+            };
+            const window = createWindow(response);
+            const component = render(window);
+
+            response.json = () => {
+                expect(component.find(Result).prop("isLoading")).toEqual(true);
+                return Promise.resolve({});
+            };
+
+            expect(component.find(Result).prop("isLoading")).toEqual(false);
+
+            await component.find(MatrixInput).prop("onSubmit")();
+
+            expect(component.find(Result).prop("isLoading")).toEqual(false);
+        });
+
         it("should render the dilation after is has been fetched", async () => {
             const dilation = [1, 2, 3, 4];
             const response = {

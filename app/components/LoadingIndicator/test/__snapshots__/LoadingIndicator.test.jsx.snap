@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingIndicator should render initially with a set of symbols 1`] = `
+<LoadingIndicator__LoadingIndicatorWrapper
+  reverse={true}
+>
+  <AnimatedSymbol
+    basis={25}
+    getRandomInt={[Function]}
+    key="loading-0"
+    offsetTop={0.009900990099009901}
+  >
+    ζ
+  </AnimatedSymbol>
+  <AnimatedSymbol
+    basis={25}
+    getRandomInt={[Function]}
+    key="loading-1"
+    offsetTop={0.009900990099009901}
+  >
+    ζ
+  </AnimatedSymbol>
+  <AnimatedSymbol
+    basis={25}
+    getRandomInt={[Function]}
+    key="loading-2"
+    offsetTop={0.009900990099009901}
+  >
+    ζ
+  </AnimatedSymbol>
+  <AnimatedSymbol
+    basis={25}
+    getRandomInt={[Function]}
+    key="loading-3"
+    offsetTop={0.009900990099009901}
+  >
+    ζ
+  </AnimatedSymbol>
+</LoadingIndicator__LoadingIndicatorWrapper>
+`;

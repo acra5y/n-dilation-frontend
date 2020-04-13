@@ -42,3 +42,11 @@ exports[`Result component should render correct markup errorDetail props is defi
 `;
 
 exports[`Result component should render correct markup when error and dilation are undefined 1`] = `<Result__AnimatedContentTransition />`;
+
+exports[`Result component should render correct markup when isLoading is true 1`] = `
+<Result__AnimatedContentTransition>
+  <LoadingIndicator
+    getRandomInt={[Function]}
+  />
+</Result__AnimatedContentTransition>
+`;

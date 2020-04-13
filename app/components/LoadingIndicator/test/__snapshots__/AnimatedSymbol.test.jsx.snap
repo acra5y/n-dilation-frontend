@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AnimatedSymbol should render children with correct initial styles 1`] = `
+<StyledSymbol
+  basis={100}
+  offsetTop={20}
+  opacity={0}
+>
+  some-symbol
+</StyledSymbol>
+`;

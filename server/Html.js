@@ -13,6 +13,11 @@ export default (styleTags, app) => `
                     font-family: 'Droid Sans', sans-serif;
                     font-display: fallback;
                 }
+                #root {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
             </style
         </head>
         <body>

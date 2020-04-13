@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import withAnimatedContentChange from "../withAnimatedContentChange";
+import LoadingIndicator from "../LoadingIndicator/LoadingIndicator";
 import Matrix from "./Matrix";
 import ErrorMessage from "./ErrorMessage";
 
@@ -12,6 +13,7 @@ const AnimatedContentTransition = styled.div`
 `;
 
 export const Result = ({
+    isLoading,
     dilation,
     errorDetails,
     opacity,
@@ -22,8 +24,16 @@ export const Result = ({
             opacity={opacity}
             animationTimeInSeconds={animationTimeInSeconds}
         >
-            {dilation && <Matrix matrixInRowMajorOrder={dilation} />}
-            {errorDetails && <ErrorMessage errorDetails={errorDetails} />}
+            {isLoading ? (
+                <LoadingIndicator />
+            ) : (
+                <>
+                    {dilation && <Matrix matrixInRowMajorOrder={dilation} />}
+                    {errorDetails && (
+                        <ErrorMessage errorDetails={errorDetails} />
+                    )}
+                </>
+            )}
         </AnimatedContentTransition>
     );
 };
