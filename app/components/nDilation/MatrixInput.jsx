@@ -61,7 +61,7 @@ const StyledInput = styled.input`
 `;
 StyledInput.displayName = "StyledInput";
 
-const matrixRegex = /^(([+-]?\d+(\.\d+)?),)*([+-]?\d+(\.\d+)?)$/;
+const matrixRegex = /^(([+-]?\d+([.,]\d+)?),?\s*)+$/;
 const isMatrix = matrixRegex.test.bind(matrixRegex);
 const isSquare = number => number > 0 && Math.sqrt(number) % 1 === 0;
 
@@ -73,11 +73,18 @@ const MatrixInput = ({ onSubmit }) => {
             onSubmit={ev => {
                 ev.preventDefault();
 
-                if (isMatrix(input.replace(/\s/g, ""))) {
-                    const parsed = JSON.parse(`[${input}]`);
+                if (isMatrix(input)) {
+                    const withDotAsDecimalSeparator = input.replace(
+                        /(\d+)([,])(\d+)(\s)+/g,
+                        "$1.$3$4"
+                    );
+                    const matrixArray = withDotAsDecimalSeparator
+                        .split(/[,\s]+/)
+                        .filter(Boolean)
+                        .map(parseFloat);
 
-                    if (isSquare(parsed.length)) {
-                        onSubmit(parsed);
+                    if (isSquare(matrixArray.length)) {
+                        onSubmit(matrixArray);
                     }
                 }
             }}

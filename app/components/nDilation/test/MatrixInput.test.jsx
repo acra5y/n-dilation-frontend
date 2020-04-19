@@ -57,15 +57,30 @@ describe("MatrixInput", () => {
         expect(defaultProps.onSubmit.mock.calls.length).toBe(0);
     });
 
-    it("should pass value from textarea to onSubmit if it is a matrix", () => {
-        const component = render();
+    const inputValues = [
+        "1.5,-2,\n3,4",
+        "1.5 -2,\n3, 4",
+        "1.5 -2,\n3, 4",
+        "1,5 -2\n3\t4",
+        "1,5 -2, 3 4,",
+    ];
 
-        component
-            .find(TextAreaAutosize)
-            .simulate("change", { target: { value: "1.5,-2,\n3,4" } });
-        component.find("StyledForm").simulate("submit", defaultSubmitEvent);
+    inputValues.forEach(inputValue => {
+        it(`should pass value ${inputValue} from textarea to onSubmit`, () => {
+            const component = render();
 
-        expect(defaultProps.onSubmit.mock.calls.length).toBe(1);
-        expect(defaultProps.onSubmit.mock.calls[0][0]).toEqual([1.5, -2, 3, 4]);
+            component
+                .find(TextAreaAutosize)
+                .simulate("change", { target: { value: inputValue } });
+            component.find("StyledForm").simulate("submit", defaultSubmitEvent);
+
+            expect(defaultProps.onSubmit.mock.calls.length).toBe(1);
+            expect(defaultProps.onSubmit.mock.calls[0][0]).toEqual([
+                1.5,
+                -2,
+                3,
+                4,
+            ]);
+        });
     });
 });
