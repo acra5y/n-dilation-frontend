@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import MatrixInput from "../MatrixInput";
+import DilationForm from "../DilationForm";
 import Result from "../Result";
 import * as WindowContext from "../../WindowContext";
 import Calculator from "../Calculator";
@@ -33,11 +33,11 @@ describe("Calculator", () => {
     });
 
     describe("on client", () => {
-        it("call fetch when onSubmit on MatrixInput is called", async () => {
+        it("call fetch when onSubmit on DilationForm is called", async () => {
             const window = createWindow();
             const component = render(window);
 
-            await component.find(MatrixInput).prop("onSubmit")();
+            await component.find(DilationForm).prop("onSubmit")();
 
             expect(window.fetch.mock.calls.length).toEqual(1);
         });
@@ -57,7 +57,7 @@ describe("Calculator", () => {
 
             expect(component.find(Result).prop("isLoading")).toEqual(false);
 
-            await component.find(MatrixInput).prop("onSubmit")();
+            await component.find(DilationForm).prop("onSubmit")();
 
             expect(component.find(Result).prop("isLoading")).toEqual(false);
         });
@@ -69,7 +69,7 @@ describe("Calculator", () => {
                 json: () => Promise.resolve({ value: dilation }),
             };
             const component = render(createWindow(response));
-            await component.find(MatrixInput).prop("onSubmit")();
+            await component.find(DilationForm).prop("onSubmit")();
             expect(component.find(Result).prop("dilation")).toEqual(dilation);
         });
 
@@ -85,7 +85,7 @@ describe("Calculator", () => {
                     json: () => Promise.resolve(responseBody),
                 };
                 const component = render(createWindow(response));
-                await component.find(MatrixInput).prop("onSubmit")();
+                await component.find(DilationForm).prop("onSubmit")();
                 expect(component.find(Result).prop("errorDetails")).toEqual(
                     responseBody
                 );
@@ -95,7 +95,7 @@ describe("Calculator", () => {
                 const error = new Error("Mock Error");
                 const fetch = jest.fn(() => Promise.reject(error));
                 const component = render(createWindow(null, fetch));
-                await component.find(MatrixInput).prop("onSubmit")();
+                await component.find(DilationForm).prop("onSubmit")();
                 expect(component.find(Result).prop("errorDetails")).toEqual(
                     error
                 );
@@ -104,12 +104,12 @@ describe("Calculator", () => {
             it("and not render dilation from a first fetch if a second fetch throws", async () => {
                 const window = createWindow();
                 const component = render(window);
-                await component.find(MatrixInput).prop("onSubmit")();
+                await component.find(DilationForm).prop("onSubmit")();
                 const mockError = new Error("Mock Error");
                 window.fetch.mockImplementation(() =>
                     Promise.reject(mockError)
                 );
-                await component.find(MatrixInput).prop("onSubmit")();
+                await component.find(DilationForm).prop("onSubmit")();
                 const result = component.find(Result);
                 expect(result.prop("dilation")).toBe(null);
                 expect(result.prop("errorDetails")).toEqual(mockError);

@@ -65,7 +65,7 @@ const matrixRegex = /^(([+-]?\d+([.,]\d+)?),?\s*)+$/;
 const isMatrix = matrixRegex.test.bind(matrixRegex);
 const isSquare = number => number > 0 && Math.sqrt(number) % 1 === 0;
 
-const MatrixInput = ({ onSubmit }) => {
+const DilationForm = ({ onSubmit }) => {
     const [input, setInput] = useState("");
     const [degree, setDegree] = useState(2);
 
@@ -117,4 +117,4 @@ const MatrixInput = ({ onSubmit }) => {
     );
 };
 
-export default MatrixInput;
+export default DilationForm;

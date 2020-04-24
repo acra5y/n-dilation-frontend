@@ -2,7 +2,7 @@ import React, { useReducer } from "react";
 
 import fetchNDilation from "../../lib/fetchNDilation";
 import { useWindowContext } from "../WindowContext";
-import MatrixInput from "./MatrixInput";
+import DilationForm from "./DilationForm";
 import Result from "./Result";
 
 const initialState = { isLoading: false, dilation: null, error: null };
@@ -48,7 +48,7 @@ const Calculator = () => {
 
     return (
         <div>
-            <MatrixInput
+            <DilationForm
                 onSubmit={
                     window && createOnSubmitHandler(window.fetch, dispatch)
                 }

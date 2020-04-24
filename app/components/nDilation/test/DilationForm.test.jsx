@@ -2,7 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 import TextAreaAutosize from "react-textarea-autosize";
 
-import MatrixInput from "../MatrixInput";
+import DilationForm from "../DilationForm";
 
 const defaultSubmitEvent = {
     preventDefault: () => {},
@@ -12,9 +12,9 @@ const defaultProps = {
     onSubmit: jest.fn(),
 };
 
-const render = () => shallow(<MatrixInput {...defaultProps} />);
+const render = () => shallow(<DilationForm {...defaultProps} />);
 
-describe("MatrixInput", () => {
+describe("DilationForm", () => {
     it("should render a form", () => {
         const component = render();
 

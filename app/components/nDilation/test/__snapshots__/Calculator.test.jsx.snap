@@ -2,7 +2,7 @@
 
 exports[`Calculator should render 1`] = `
 <div>
-  <MatrixInput
+  <DilationForm
     onSubmit={[Function]}
   />
   <withAnimatedContentChange(Result)
