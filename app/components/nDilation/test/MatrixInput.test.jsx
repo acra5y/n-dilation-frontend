@@ -21,12 +21,11 @@ describe("MatrixInput", () => {
         expect(component.exists("StyledForm")).toEqual(true);
     });
 
-    it("should render a label", () => {
+    it("should render a label for the textarea", () => {
         const component = render();
 
-        expect(component.exists("StyledLabel")).toEqual(true);
-        expect(component.find("StyledLabel").prop("htmlFor")).toEqual(
-            "matrix-input"
+        expect(component.exists("StyledLabel[htmlFor='matrix-input']")).toEqual(
+            true
         );
     });
 
@@ -66,12 +65,15 @@ describe("MatrixInput", () => {
     ];
 
     inputValues.forEach(inputValue => {
-        it(`should pass value ${inputValue} from textarea to onSubmit`, () => {
+        it(`should pass value ${inputValue} from textarea and degree to onSubmit`, () => {
             const component = render();
 
             component
                 .find(TextAreaAutosize)
                 .simulate("change", { target: { value: inputValue } });
+            component
+                .find("input[type='number']")
+                .simulate("change", { target: { value: 3 } });
             component.find("StyledForm").simulate("submit", defaultSubmitEvent);
 
             expect(defaultProps.onSubmit.mock.calls.length).toBe(1);
@@ -81,6 +83,19 @@ describe("MatrixInput", () => {
                 3,
                 4,
             ]);
+            expect(defaultProps.onSubmit.mock.calls[0][1]).toEqual(3);
         });
+    });
+
+    it("should render a input for the degree", () => {
+        const component = render();
+        const input = component.find("input[type='number']");
+        expect(input.prop("name")).toEqual("degree");
+    });
+
+    it("should render a label for the degree input", () => {
+        const component = render();
+
+        expect(component.exists("StyledLabel[htmlFor='degree']")).toEqual(true);
     });
 });

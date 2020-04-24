@@ -67,13 +67,14 @@ const isSquare = number => number > 0 && Math.sqrt(number) % 1 === 0;
 
 const MatrixInput = ({ onSubmit }) => {
     const [input, setInput] = useState("");
+    const [degree, setDegree] = useState(2);
 
     return (
         <StyledForm
             onSubmit={ev => {
                 ev.preventDefault();
 
-                if (isMatrix(input)) {
+                if (isMatrix(input) && degree > 0) {
                     const withDotAsDecimalSeparator = input.replace(
                         /(\d+)([,])(\d+)(\s)+/g,
                         "$1.$3$4"
@@ -84,7 +85,7 @@ const MatrixInput = ({ onSubmit }) => {
                         .map(parseFloat);
 
                     if (isSquare(matrixArray.length)) {
-                        onSubmit(matrixArray);
+                        onSubmit(matrixArray, degree);
                     }
                 }
             }}
@@ -100,6 +101,17 @@ const MatrixInput = ({ onSubmit }) => {
                     placeholder="0, 0.5, 0, 0"
                 />
             </TextareaWrapper>
+            <StyledLabel htmlFor="degree">
+                Choose degree of dilation
+            </StyledLabel>
+            <input
+                type="number"
+                min="1"
+                step="1"
+                name="degree"
+                onChange={ev => setDegree(parseInt(ev.target.value, 10))}
+                value={degree}
+            />
             <StyledInput type="submit" value="Compute" />
         </StyledForm>
     );

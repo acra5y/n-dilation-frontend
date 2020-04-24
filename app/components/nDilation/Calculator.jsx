@@ -22,10 +22,10 @@ function reducer(state, action) {
     }
 }
 
-const createOnSubmitHandler = (fetch, dispatch) => async matrix => {
+const createOnSubmitHandler = (fetch, dispatch) => async (matrix, degree) => {
     try {
         dispatch({ type: "FETCH_START" });
-        const response = await fetchNDilation(fetch, matrix);
+        const response = await fetchNDilation(fetch, matrix, degree);
 
         const body = await response.json();
 

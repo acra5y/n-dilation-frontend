@@ -1,4 +1,4 @@
-const fetchNDilation = (fetch, value) => {
+const fetchNDilation = (fetch, value, degree) => {
     return fetch("http://localhost:8080/dilation", {
         method: "POST",
         mode: "cors",
@@ -11,7 +11,7 @@ const fetchNDilation = (fetch, value) => {
         referrer: "no-referrer",
         body: JSON.stringify({
             value,
-            degree: 2,
+            degree,
         }),
     });
 };
