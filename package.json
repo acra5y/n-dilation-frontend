@@ -22,10 +22,11 @@
     "test:unit": "./node_modules/.bin/jest",
     "test:updateSnapshots": "./node_modules/.bin/jest -u"
   },
-  "pre-commit": [
-    "prettier",
-    "lint"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run prettier && npm run lint"
+    }
+  },
   "author": "Olivier Schmelzle",
   "license": "MIT",
   "devDependencies": {
@@ -34,17 +35,17 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-styled-components": "^1.10.6",
-    "concurrently": "^4.1.0",
+    "concurrently": "^5.2.0",
     "copy-webpack-plugin": "^5.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "enzyme-to-json": "^3.3.5",
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.12.4",
+    "husky": "^4.2.5",
     "jest": "^25.2.7",
-    "jest-styled-components": "^6.3.3",
+    "jest-styled-components": "^7.0.2",
     "node-dev": "^4.0.0",
-    "pre-commit": "^1.2.2",
     "prettier": "^1.17.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
@@ -54,7 +55,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-textarea-autosize": "^7.1.0",
-    "styled-components": "^4.3.2",
+    "styled-components": "^5.1.0",
     "webpack-node-externals": "^1.7.2"
   }
 }
