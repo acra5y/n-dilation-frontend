@@ -1,0 +1,3 @@
+[submodule "n-dilation-webassembly"]
+	path = n-dilation-webassembly
+	url = git@github.com:acra5y/n-dilation-webassembly.git

@@ -2,11 +2,11 @@
 
 exports[`ErrorMessage should render 1`] = `
 <div>
-  Ooops, something went terribly wrong 🤯
+  Ooops, something went terribly wrong 🤯. You will probably have to reload the page now.
 </div>
 `;
 
-exports[`ErrorMessage should render error message for validation errors 1`] = `
+exports[`ErrorMessage should render error message for validationError 1`] = `
 <div>
   This did not work. Are you sure, your matrix is a square contraction with real numbers? 🤔
 </div>

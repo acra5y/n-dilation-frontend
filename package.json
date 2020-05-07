@@ -8,9 +8,10 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node ./dist/server.js",
-    "dev": "./node_modules/.bin/concurrently --kill-others \"npm run build-dev-server\" \"npm run build-dev\" \"./node_modules/.bin/node-dev ./dist/server.js\"",
-    "build-dev-server": "webpack --mode development --config server.production.js --watch",
-    "build-server": "webpack --mode production --config server.production.js",
+    "dev": "npm run build:wasm && ./node_modules/.bin/concurrently --kill-others \"npm run build:dev-server\" \"npm run build-dev\" \"./node_modules/.bin/node-dev ./dist/server.js\"",
+    "build:wasm": "cd ./n-dilation-webassembly && GOOS=js GOARCH=wasm go build -o ../wasm/main.wasm",
+    "build:dev-server": "webpack --mode development --config server.production.js --watch",
+    "build:server": "webpack --mode production --config server.production.js",
     "build-dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
     "lint": "./node_modules/.bin/eslint . --ext .jsx --ext .js",
@@ -34,6 +35,7 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-styled-components": "^1.10.6",
     "concurrently": "^4.1.0",
+    "copy-webpack-plugin": "^5.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "enzyme-to-json": "^3.3.5",
@@ -48,9 +50,9 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "express": "^4.16.4",
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3",
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-textarea-autosize": "^7.1.0",
     "styled-components": "^4.3.2",
     "webpack-node-externals": "^1.7.2"

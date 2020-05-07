@@ -1,8 +1,13 @@
 import React from "react";
 
-function ErrorMessage({ errorDetails }) {
-    if (!errorDetails.validationError) {
-        return <div>Ooops, something went terribly wrong 🤯</div>;
+function ErrorMessage({ validationError }) {
+    if (!validationError) {
+        return (
+            <div>
+                Ooops, something went terribly wrong 🤯. You will probably have
+                to reload the page now.
+            </div>
+        );
     }
 
     return (

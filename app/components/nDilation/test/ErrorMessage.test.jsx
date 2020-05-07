@@ -4,7 +4,7 @@ import { shallow } from "enzyme";
 import ErrorMessage from "../ErrorMessage";
 
 const defaultProps = {
-    errorDetails: "whatever",
+    validationError: false,
 };
 
 const render = overrideProps =>
@@ -17,9 +17,9 @@ describe("ErrorMessage", () => {
         expect(component).toMatchSnapshot();
     });
 
-    it("should render error message for validation errors", () => {
+    it("should render error message for validationError", () => {
         const component = render({
-            errorDetails: { validationError: "whatever" },
+            validationError: true,
         });
 
         expect(component).toMatchSnapshot();

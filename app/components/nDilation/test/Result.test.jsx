@@ -22,15 +22,14 @@ describe("Result component", () => {
         {
             props: {
                 dilation: [1, 2, 3, 4],
-                errorDetails: new Error("Test-Error"),
+                runtimeError: true,
             },
             description:
-                "should render correct markup dilation and errorDetail props are defined",
+                "should render correct markup dilation and runtimeError is true",
         },
         {
-            props: { errorDetails: new Error("Test-Error") },
-            description:
-                "should render correct markup errorDetail props is defined",
+            props: { validationError: true },
+            description: "should render correct markup validationError is true",
         },
     ];
     testCases.forEach(({ props, description }) => {

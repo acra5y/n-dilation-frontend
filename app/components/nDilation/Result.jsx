@@ -15,7 +15,8 @@ const AnimatedContentTransition = styled.div`
 export const Result = ({
     isLoading,
     dilation,
-    errorDetails,
+    validationError,
+    runtimeError,
     opacity,
     animationTimeInSeconds,
 }) => {
@@ -29,9 +30,10 @@ export const Result = ({
             ) : (
                 <>
                     {dilation && <Matrix matrixInRowMajorOrder={dilation} />}
-                    {errorDetails && (
-                        <ErrorMessage errorDetails={errorDetails} />
-                    )}
+                    {validationError ||
+                        (runtimeError && (
+                            <ErrorMessage validationError={validationError} />
+                        ))}
                 </>
             )}
         </AnimatedContentTransition>

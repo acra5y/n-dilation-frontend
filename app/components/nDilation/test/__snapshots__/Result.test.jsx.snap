@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Result component should render correct markup dilation and errorDetail props are defined 1`] = `
+exports[`Result component should render correct markup dilation and runtimeError is true 1`] = `
 <Result__AnimatedContentTransition>
   <_default
     matrixInRowMajorOrder={
@@ -12,9 +12,7 @@ exports[`Result component should render correct markup dilation and errorDetail 
       ]
     }
   />
-  <ErrorMessage
-    errorDetails={[Error: Test-Error]}
-  />
+  <ErrorMessage />
 </Result__AnimatedContentTransition>
 `;
 
@@ -33,11 +31,9 @@ exports[`Result component should render correct markup dilation prop is defined 
 </Result__AnimatedContentTransition>
 `;
 
-exports[`Result component should render correct markup errorDetail props is defined 1`] = `
+exports[`Result component should render correct markup validationError is true 1`] = `
 <Result__AnimatedContentTransition>
-  <ErrorMessage
-    errorDetails={[Error: Test-Error]}
-  />
+  <Component />
 </Result__AnimatedContentTransition>
 `;
 

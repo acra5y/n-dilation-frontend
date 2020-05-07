@@ -2,13 +2,15 @@
 
 exports[`Calculator should render 1`] = `
 <div>
+  <WasmLoader />
   <DilationForm
-    onSubmit={[Function]}
+    onSubmit={null}
   />
   <withAnimatedContentChange(Result)
     dilation={null}
-    errorDetails={null}
     isLoading={false}
+    runtimeError={false}
+    validationError={false}
   />
 </div>
 `;
