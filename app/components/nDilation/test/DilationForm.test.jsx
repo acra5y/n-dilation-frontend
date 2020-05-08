@@ -9,10 +9,12 @@ const defaultSubmitEvent = {
 };
 
 const defaultProps = {
+    disabled: false,
     onSubmit: jest.fn(),
 };
 
-const render = () => shallow(<DilationForm {...defaultProps} />);
+const render = (overwriteProps = {}) =>
+    shallow(<DilationForm {...defaultProps} {...overwriteProps} />);
 
 describe("DilationForm", () => {
     it("should render a form", () => {
@@ -54,6 +56,12 @@ describe("DilationForm", () => {
         component.find("StyledForm").simulate("submit", defaultSubmitEvent);
 
         expect(defaultProps.onSubmit.mock.calls.length).toBe(0);
+    });
+
+    it("should disable the submit button if disabled prop is true", () => {
+        const component = render({ disabled: true });
+
+        expect(component.find("StyledInput").prop("disabled")).toEqual(true);
     });
 
     const inputValues = [

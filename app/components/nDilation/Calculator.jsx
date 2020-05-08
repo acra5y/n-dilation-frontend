@@ -1,9 +1,11 @@
-import React, { useReducer, useEffect, useRef } from "react";
+import React, { useReducer, useEffect } from "react";
+import styled from "styled-components";
 
 import { useWindowContext } from "../WindowContext";
 import DilationForm from "./DilationForm";
 import Result from "./Result";
 import WasmLoader from "../WasmLoader";
+import LoadingIndicator from "../LoadingIndicator/LoadingIndicator";
 
 const initialState = {
     isLoading: false,
@@ -11,6 +13,8 @@ const initialState = {
     validationError: false,
     runtimeError: false,
     ready: false,
+    matrix: null,
+    degree: null,
 };
 
 function reducer(state, action) {
@@ -24,6 +28,8 @@ function reducer(state, action) {
                 dilation: null,
                 runtimeError: false,
                 validationError: false,
+                matrix: action.matrix,
+                degree: action.degree,
             };
         case "CALCULATE_OK":
             return {
@@ -36,68 +42,80 @@ function reducer(state, action) {
             return {
                 ...state,
                 isLoading: false,
-                dilation: null,
-                runtimeError: false,
                 validationError: true,
             };
         case "CALCULATE_ERROR":
             return {
                 ...state,
-                ready: false,
                 isLoading: false,
-                dilation: null,
                 runtimeError: true,
-                validationError: false,
             };
         default:
             return state;
     }
 }
 
-const createOnSubmitHandler = (unitaryNDilationAsync, dispatch) => async (
-    matrix,
-    degree
-) => {
-    try {
-        dispatch({ type: "CALCULATE_START" });
-        const { error, value } = await unitaryNDilationAsync(matrix, degree);
-
-        if (!error) {
-            dispatch({ type: "CALCULATE_OK", payload: value });
-        } else {
-            dispatch({ type: "VALIDATION_ERROR", payload: error });
-        }
-    } catch (e) {
-        dispatch({ type: "CALCULATE_ERROR", payload: e });
-    }
-};
+const StyledLoadingIndicator = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+`;
 
 const Calculator = () => {
     const [
-        { isLoading, dilation, validationError, runtimeError },
+        {
+            isLoading,
+            dilation,
+            validationError,
+            runtimeError,
+            matrix,
+            degree,
+            ready,
+        },
         dispatch,
     ] = useReducer(reducer, initialState);
-    const onSubmitHandler = useRef(null);
     const window = useWindowContext();
 
     useEffect(() => {
-        if (!onSubmitHandler.current) {
-            const unitaryNDilationAsync = (matrix, degree) =>
-                Promise.resolve(window.UnitaryNDilation(matrix, degree));
-            onSubmitHandler.current = createOnSubmitHandler(
-                unitaryNDilationAsync,
-                dispatch
-            );
-            dispatch({ type: "WASM_INITIALIZED" });
+        if (isLoading) {
+            try {
+                const { error, value } = window.UnitaryNDilation(
+                    matrix,
+                    degree
+                );
+
+                if (!error) {
+                    dispatch({ type: "CALCULATE_OK", payload: value });
+                } else {
+                    dispatch({ type: "VALIDATION_ERROR", payload: error });
+                }
+            } catch (e) {
+                dispatch({ type: "CALCULATE_ERROR", payload: e });
+            }
         }
-    }, [window && window.UnitaryNDilation]);
+    }, [isLoading]);
+
+    if (!ready) {
+        return (
+            <StyledLoadingIndicator>
+                <WasmLoader
+                    onLoad={() => dispatch({ type: "WASM_INITIALIZED" })}
+                />
+                <LoadingIndicator />
+            </StyledLoadingIndicator>
+        );
+    }
 
     return (
         <div>
-            <WasmLoader />
-            <DilationForm onSubmit={onSubmitHandler.current} />
+            <DilationForm
+                onSubmit={(matrix, degree) =>
+                    dispatch({ type: "CALCULATE_START", matrix, degree })
+                }
+                disabled={isLoading}
+            />
             <Result
-                isLoading={isLoading}
                 validationError={validationError}
                 runtimeError={runtimeError}
                 dilation={dilation}

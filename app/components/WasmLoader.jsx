@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { useWindowContext } from "./WindowContext";
 
-const WasmLoader = () => {
+const WasmLoader = ({ onLoad }) => {
     const window = useWindowContext();
 
     useEffect(() => {
@@ -15,11 +15,14 @@ const WasmLoader = () => {
                     go.importObject
                 );
                 go.run(webAssembly.instance); // populates window.UnitaryNDilation
+                onLoad();
             };
             script.src = "/public/wasm/wasm_exec.js";
             script.type = "text/javascript";
 
             document.head.appendChild(script);
+        } else {
+            onLoad();
         }
     }, []);
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { act } from "react-dom/test-utils";
 import { mount, shallow } from "enzyme";
 
@@ -6,6 +6,7 @@ import DilationForm from "../DilationForm";
 import Result from "../Result";
 import * as WindowContext from "../../WindowContext";
 import * as WasmLoader from "../../WasmLoader";
+import * as LoadingIndicator from "../../LoadingIndicator/LoadingIndicator";
 import Calculator from "../Calculator";
 
 const createWindow = (result = {}) => ({
@@ -15,16 +16,24 @@ const render = (window = {}) => {
     jest.spyOn(WindowContext, "useWindowContext").mockImplementation(
         () => window
     );
-    jest.spyOn(WasmLoader, "default").mockImplementation(() => null);
+    jest.spyOn(WasmLoader, "default").mockImplementation(({ onLoad }) => {
+        useEffect(onLoad, []);
+        return null;
+    });
+    jest.spyOn(LoadingIndicator, "default").mockImplementation(() => null);
     return mount(<Calculator />);
 };
 
 describe("Calculator", () => {
     it("should render", () => {
-        jest.spyOn(WindowContext, "useWindowContext").mockImplementation(
-            () => ({})
-        );
         const component = shallow(<Calculator />);
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it("should render form after WasmLoader called init method", () => {
+        const component = shallow(<Calculator />);
+        component.find("WasmLoader").prop("onLoad")();
 
         expect(component).toMatchSnapshot();
     });
@@ -41,25 +50,31 @@ describe("Calculator", () => {
             expect(window.UnitaryNDilation.mock.calls.length).toEqual(1);
         });
 
-        it("should set isLoading prop during fetch", async () => {
+        it("should set isLoading prop during calculation", async () => {
             const window = createWindow();
             const component = render(window);
 
             window.UnitaryNDilation = () => {
-                expect(component.find(Result).prop("isLoading")).toEqual(true);
-                return Promise.resolve({});
+                expect(component.find(DilationForm).prop("disabled")).toEqual(
+                    true
+                );
+                return {};
             };
 
-            expect(component.find(Result).prop("isLoading")).toEqual(false);
+            expect(component.find(DilationForm).prop("disabled")).toEqual(
+                false
+            );
 
             await act(async () => {
                 component.find(DilationForm).prop("onSubmit")();
             });
 
-            expect(component.find(Result).prop("isLoading")).toEqual(false);
+            expect(component.find(DilationForm).prop("disabled")).toEqual(
+                false
+            );
         });
 
-        it("should render the dilation after is has been fetched", async () => {
+        it("should render the dilation after calculation", async () => {
             const dilation = [1, 2, 3, 4];
             const component = render(createWindow({ value: dilation }));
 

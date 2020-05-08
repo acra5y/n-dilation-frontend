@@ -38,11 +38,3 @@ exports[`Result component should render correct markup validationError is true 1
 `;
 
 exports[`Result component should render correct markup when error and dilation are undefined 1`] = `<Result__AnimatedContentTransition />`;
-
-exports[`Result component should render correct markup when isLoading is true 1`] = `
-<Result__AnimatedContentTransition>
-  <LoadingIndicator
-    getRandomInt={[Function]}
-  />
-</Result__AnimatedContentTransition>
-`;

@@ -1,14 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Calculator should render 1`] = `
+<Calculator__StyledLoadingIndicator>
+  <WasmLoader
+    onLoad={[Function]}
+  />
+  <LoadingIndicator
+    getRandomInt={[Function]}
+  />
+</Calculator__StyledLoadingIndicator>
+`;
+
+exports[`Calculator should render form after WasmLoader called init method 1`] = `
 <div>
-  <WasmLoader />
   <DilationForm
-    onSubmit={null}
+    disabled={false}
+    onSubmit={[Function]}
   />
   <withAnimatedContentChange(Result)
     dilation={null}
-    isLoading={false}
     runtimeError={false}
     validationError={false}
   />

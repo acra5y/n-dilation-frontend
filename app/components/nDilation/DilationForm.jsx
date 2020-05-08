@@ -58,6 +58,10 @@ const StyledInput = styled.input`
         cursor: pointer;
         border-color: ${yellow};
     }
+    &:disabled {
+        cursor: not-allowed;
+        border-color: ${darkGreen};
+    }
 `;
 StyledInput.displayName = "StyledInput";
 
@@ -65,7 +69,7 @@ const matrixRegex = /^(([+-]?\d+([.,]\d+)?),?\s*)+$/;
 const isMatrix = matrixRegex.test.bind(matrixRegex);
 const isSquare = number => number > 0 && Math.sqrt(number) % 1 === 0;
 
-const DilationForm = ({ onSubmit }) => {
+const DilationForm = ({ onSubmit, disabled }) => {
     const [input, setInput] = useState("");
     const [degree, setDegree] = useState(2);
 
@@ -112,7 +116,7 @@ const DilationForm = ({ onSubmit }) => {
                 onChange={ev => setDegree(parseInt(ev.target.value, 10))}
                 value={degree}
             />
-            <StyledInput type="submit" value="Compute" />
+            <StyledInput type="submit" value="Compute" disabled={disabled} />
         </StyledForm>
     );
 };
