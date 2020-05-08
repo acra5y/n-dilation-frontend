@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matrix should render a grid 1`] = `
+<Matrix__WrapperWithPaddingOnOverflow>
+  <Matrix
+    dimension={3}
+  >
+    <span
+      key="entry-0"
+    >
+      0
+    </span>
+    <span
+      key="entry-1"
+    >
+      1
+    </span>
+    <span
+      key="entry-2"
+    >
+      2
+    </span>
+    <span
+      key="entry-3"
+    >
+      3
+    </span>
+    <span
+      key="entry-4"
+    >
+      4
+    </span>
+    <span
+      key="entry-5"
+    >
+      5
+    </span>
+    <span
+      key="entry-6"
+    >
+      6
+    </span>
+    <span
+      key="entry-7"
+    >
+      7
+    </span>
+    <span
+      key="entry-8"
+    >
+      8
+    </span>
+  </Matrix>
+</Matrix__WrapperWithPaddingOnOverflow>
+`;
