@@ -38,6 +38,13 @@ describe("Calculator", () => {
         expect(component).toMatchSnapshot();
     });
 
+    it("should render with fatalError when WasmLoader calls onError", () => {
+        const component = shallow(<Calculator />);
+        component.find("WasmLoader").prop("onError")();
+
+        expect(component).toMatchSnapshot();
+    });
+
     describe("on client", () => {
         it("call window.UnitaryNDilation when onSubmit on DilationForm is called", async () => {
             const window = createWindow();
@@ -99,7 +106,7 @@ describe("Calculator", () => {
                 expect(component.find(Result).prop("validationError")).toEqual(
                     true
                 );
-                expect(component.find(Result).prop("runtimeError")).toEqual(
+                expect(component.find(Result).prop("fatalError")).toEqual(
                     false
                 );
             });
@@ -119,9 +126,7 @@ describe("Calculator", () => {
                 expect(component.find(Result).prop("validationError")).toEqual(
                     false
                 );
-                expect(component.find(Result).prop("runtimeError")).toEqual(
-                    true
-                );
+                expect(component.find(Result).prop("fatalError")).toEqual(true);
             });
 
             it("and not render dilation from a first calculation if a second calculation throws", async () => {
@@ -147,9 +152,7 @@ describe("Calculator", () => {
                 expect(component.find(Result).prop("validationError")).toEqual(
                     false
                 );
-                expect(component.find(Result).prop("runtimeError")).toEqual(
-                    true
-                );
+                expect(component.find(Result).prop("fatalError")).toEqual(true);
             });
         });
     });

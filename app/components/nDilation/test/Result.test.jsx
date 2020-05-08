@@ -18,10 +18,10 @@ describe("Result component", () => {
         {
             props: {
                 dilation: [1, 2, 3, 4],
-                runtimeError: true,
+                fatalError: true,
             },
             description:
-                "should render correct markup dilation and runtimeError is true",
+                "should render correct markup dilation and fatalError is true",
         },
         {
             props: { validationError: true },

@@ -47,6 +47,20 @@ describe("DilationForm", () => {
         expect(defaultProps.onSubmit.mock.calls.length).toBe(0);
     });
 
+    it("should render an error message if input is not a matrix", () => {
+        const component = render();
+
+        component.find("StyledForm").simulate("submit", defaultSubmitEvent);
+
+        expect(component.find("Error").exists()).toEqual(true);
+
+        component
+            .find("TextareaAutosize")
+            .simulate("change", { target: { value: "" } });
+
+        expect(component.find("Error").exists()).toEqual(false);
+    });
+
     it("should not call onSubmit if input is not s square matrix", () => {
         const component = render();
 

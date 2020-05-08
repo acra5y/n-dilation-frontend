@@ -3,6 +3,7 @@
 exports[`Calculator should render 1`] = `
 <Calculator__StyledLoadingIndicator>
   <WasmLoader
+    onError={[Function]}
     onLoad={[Function]}
   />
   <LoadingIndicator
@@ -19,7 +20,21 @@ exports[`Calculator should render form after WasmLoader called init method 1`] =
   />
   <withAnimatedContentChange(Result)
     dilation={null}
-    runtimeError={false}
+    fatalError={false}
+    validationError={false}
+  />
+</div>
+`;
+
+exports[`Calculator should render with fatalError when WasmLoader calls onError 1`] = `
+<div>
+  <DilationForm
+    disabled={false}
+    onSubmit={[Function]}
+  />
+  <withAnimatedContentChange(Result)
+    dilation={null}
+    fatalError={true}
     validationError={false}
   />
 </div>

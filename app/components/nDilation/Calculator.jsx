@@ -10,6 +10,7 @@ import LoadingIndicator from "../LoadingIndicator/LoadingIndicator";
 const initialState = {
     isLoading: false,
     dilation: null,
+    initError: false,
     validationError: false,
     runtimeError: false,
     ready: false,
@@ -21,6 +22,8 @@ function reducer(state, action) {
     switch (action.type) {
         case "WASM_INITIALIZED":
             return { ...state, ready: true };
+        case "INIT_ERROR":
+            return { ...state, initError: true };
         case "CALCULATE_START":
             return {
                 ...state,
@@ -68,6 +71,7 @@ const Calculator = () => {
             isLoading,
             dilation,
             validationError,
+            initError,
             runtimeError,
             matrix,
             degree,
@@ -88,19 +92,20 @@ const Calculator = () => {
                 if (!error) {
                     dispatch({ type: "CALCULATE_OK", payload: value });
                 } else {
-                    dispatch({ type: "VALIDATION_ERROR", payload: error });
+                    dispatch({ type: "VALIDATION_ERROR" });
                 }
             } catch (e) {
-                dispatch({ type: "CALCULATE_ERROR", payload: e });
+                dispatch({ type: "CALCULATE_ERROR" });
             }
         }
     }, [isLoading]);
 
-    if (!ready) {
+    if (!ready && !initError) {
         return (
             <StyledLoadingIndicator>
                 <WasmLoader
                     onLoad={() => dispatch({ type: "WASM_INITIALIZED" })}
+                    onError={() => dispatch({ type: "INIT_ERROR" })}
                 />
                 <LoadingIndicator />
             </StyledLoadingIndicator>
@@ -117,7 +122,7 @@ const Calculator = () => {
             />
             <Result
                 validationError={validationError}
-                runtimeError={runtimeError}
+                fatalError={runtimeError || initError}
                 dilation={dilation}
             />
         </div>
