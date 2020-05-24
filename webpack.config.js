@@ -1,5 +1,7 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const BrotliPlugin = require("brotli-webpack-plugin");
 
 module.exports = {
     entry: "./app/index.jsx",
@@ -27,5 +29,11 @@ module.exports = {
         new CopyPlugin([
             { from: "wasm", to: "wasm" },
         ]),
+        new CompressionPlugin({
+            include: /(main\.js)|(main\.wasm)$/
+        }),
+        new BrotliPlugin({
+            test: /(main\.js)|(main\.wasm)$/,
+        })
     ],
 };
