@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import express from "express";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import path from "path";
 import { ServerStyleSheet } from "styled-components";
 import expressStaticGzip from "express-static-gzip";
+import cacheManager from "cache-manager";
 
 import App from "../app/components/App";
 import Html from "./Html";
@@ -24,20 +26,36 @@ server.use(
     })
 );
 
-server.get("/", (req, res) => {
+const memoryCache = cacheManager.caching({ store: "memory" });
+
+const renderPage = cb => {
+    console.log("rendering page");
     const sheet = new ServerStyleSheet();
     try {
         const component = renderToString(sheet.collectStyles(<App />));
         const styleTags = sheet.getStyleTags();
-        res.set("Cache-Control", `public, max-age=${maxAge}`);
-        res.send(Html(styleTags, component));
+
+        cb(null, Html(styleTags, component));
     } catch (error) {
-        // eslint-disable-next-line no-console
         console.error(error);
-        res.status(500).send("Internal Server Error");
+        cb(error, null);
     } finally {
         sheet.seal();
     }
+};
+
+const createResponseHandler = res => (err, html) => {
+    if (err) {
+        return res.status(500).send("Internal Server Error");
+    }
+    res.set("Cache-Control", `public, max-age=${maxAge}`);
+    res.send(html);
+};
+
+server.get("/", (req, res) => {
+    console.log(req.url, new Date().toISOString());
+    const cacheKey = "App" + JSON.stringify(req.query);
+    memoryCache.wrap(cacheKey, renderPage, createResponseHandler(res));
 });
 
 server.listen(port);
