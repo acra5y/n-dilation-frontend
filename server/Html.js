@@ -5,7 +5,10 @@ export default (styleTags, app) => `
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>App</title>
+            <meta name="description" lang="en" content="Numerically calculate Unitary N-Dilations for your real square matrix contractions.">
+            <meta name="keywords" lang="en" content="Linear Algebra, Real Matrices, Square Matrices, Matrix Contractions, Unitary N-Dilations">
+            <title>N-Dilation-Computer</title>
+            <link rel="icon" href="/public/favicon.svg" type="image/svg+xml">
             ${styleTags}
             <style>
                 @font-face {
@@ -18,7 +21,7 @@ export default (styleTags, app) => `
                     flex-direction: column;
                     align-items: center;
                 }
-            </style
+            </style>
         </head>
         <body>
             <section id="root">${app}</section>

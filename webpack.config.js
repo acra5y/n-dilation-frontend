@@ -26,9 +26,12 @@ module.exports = {
         extensions: [".js", ".jsx",]
     },
     plugins: [
-        new CopyPlugin([
-            { from: "wasm", to: "wasm" },
-        ]),
+        new CopyPlugin({
+            patterns: [
+                { from: "wasm", to: "wasm" },
+                { from: "assets", to: "" },
+            ]
+        }),
         new CompressionPlugin({
             include: /(main\.js)|(main\.wasm)$/
         }),
