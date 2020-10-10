@@ -55,7 +55,7 @@ describe("DilationForm", () => {
         expect(component.find("Error").exists()).toEqual(true);
 
         component
-            .find("TextareaAutosize")
+            .find(TextAreaAutosize)
             .simulate("change", { target: { value: "" } });
 
         expect(component.find("Error").exists()).toEqual(false);
