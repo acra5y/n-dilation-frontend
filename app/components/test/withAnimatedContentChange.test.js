@@ -41,7 +41,7 @@ describe("withAnimatedContentChange", () => {
             component.update();
         };
 
-        const assertOpacityChangesFromUseEffect = expectedCustomProps => {
+        const assertOpacityChangesFromUseEffect = (expectedCustomProps) => {
             expect(component.find(TestComponent).prop("opacity")).toEqual(0);
             letUseEffectFinish();
             expect(component.find(TestComponent).props()).toEqual({

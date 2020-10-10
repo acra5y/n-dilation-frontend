@@ -5,7 +5,7 @@ import { ANIMATION_TIME, INTERVAL, MINIMUM_TIME_VISIBLE } from "./constants";
 import getRandomInt from "../../lib/getRandomInt";
 import { useWindowContext } from "../WindowContext";
 
-const StyledSymbol = styled.span.attrs(props => ({
+const StyledSymbol = styled.span.attrs((props) => ({
     style: {
         flexBasis: `${props.basis}%`,
         margin: `calc(4rem * ${props.offsetTop}) 3px 3px`,
@@ -17,7 +17,7 @@ const StyledSymbol = styled.span.attrs(props => ({
 `;
 StyledSymbol.displayName = "StyledSymbol";
 
-const AnimatedSymbol = props => {
+const AnimatedSymbol = (props) => {
     const [opacity, setOpacity] = useState(0);
 
     const window = useWindowContext();

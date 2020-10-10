@@ -5,7 +5,7 @@ import * as WindowContext from "../../WindowContext";
 import AnimatedSymbol from "../AnimatedSymbol";
 
 const createWindow = (
-    setTimeout = jest.fn(cb => {
+    setTimeout = jest.fn((cb) => {
         cb();
         return "some-id";
     }),
@@ -103,7 +103,7 @@ describe("AnimatedSymbol", () => {
     it("should clear timeouts on unmount", () => {
         const window = createWindow();
         window.setTimeout
-            .mockImplementationOnce(cb => {
+            .mockImplementationOnce((cb) => {
                 cb();
                 return "id-1";
             })

@@ -24,14 +24,14 @@ const TextareaWrapper = styled.div`
     ${marginBetweenFormElements}
 
     & > textarea {
-        border: 2px solid ${props => (props.error ? darkRed : lightGreen)};
+        border: 2px solid ${(props) => (props.error ? darkRed : lightGreen)};
         border-radius: 3px;
         min-height: 2rem;
         transition: height ease-out 0.1s;
 
         &:hover,
         &:focus {
-            border-color: ${props => (props.error ? darkRed : yellow)};
+            border-color: ${(props) => (props.error ? darkRed : yellow)};
         }
     }
 `;
@@ -74,7 +74,7 @@ Error.displayName = "Error";
 
 const matrixRegex = /^(([+-]?\d+([.,]\d+)?),?\s*)+$/;
 const isMatrix = matrixRegex.test.bind(matrixRegex);
-const isSquare = number => number > 0 && Math.sqrt(number) % 1 === 0;
+const isSquare = (number) => number > 0 && Math.sqrt(number) % 1 === 0;
 
 const DilationForm = ({ onSubmit, disabled }) => {
     const [input, setInput] = useState("");
@@ -83,7 +83,7 @@ const DilationForm = ({ onSubmit, disabled }) => {
 
     return (
         <StyledForm
-            onSubmit={ev => {
+            onSubmit={(ev) => {
                 ev.preventDefault();
 
                 if (isMatrix(input) && degree > 0) {
@@ -109,7 +109,7 @@ const DilationForm = ({ onSubmit, disabled }) => {
                 <TextAreaAutosize
                     name="matrix-input"
                     type="text"
-                    onChange={ev => {
+                    onChange={(ev) => {
                         setInput(ev.target.value);
                         setError(false);
                     }}
@@ -133,7 +133,7 @@ const DilationForm = ({ onSubmit, disabled }) => {
                 min="1"
                 step="1"
                 name="degree"
-                onChange={ev => setDegree(parseInt(ev.target.value, 10))}
+                onChange={(ev) => setDegree(parseInt(ev.target.value, 10))}
                 value={degree}
             />
             <StyledInput type="submit" value="Compute" disabled={disabled} />

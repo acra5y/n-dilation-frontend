@@ -35,8 +35,9 @@ function withAnimatedContentChange(WrappedComponent) {
         );
     }
 
-    WithAnimatedContentChange.displayName = `withAnimatedContentChange(${WrappedComponent.displayName ||
-        WrappedComponent.name})`;
+    WithAnimatedContentChange.displayName = `withAnimatedContentChange(${
+        WrappedComponent.displayName || WrappedComponent.name
+    })`;
 
     return WithAnimatedContentChange;
 }

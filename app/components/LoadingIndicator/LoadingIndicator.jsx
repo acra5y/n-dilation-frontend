@@ -37,7 +37,7 @@ const symbolSet = [
     "ζ",
 ];
 
-const getRandomSymbols = getRandomIntFromProps => {
+const getRandomSymbols = (getRandomIntFromProps) => {
     const amountOfSymbols = getRandomIntFromProps(MAX_SYMBOLS) + 1;
 
     return Array.from(Array(amountOfSymbols)).map(
@@ -53,7 +53,7 @@ const LoadingIndicatorWrapper = styled.div`
     width: 300px;
 `;
 
-const LoadingIndicator = props => {
+const LoadingIndicator = (props) => {
     const [symbols, setSymbols] = useState(
         getRandomSymbols(props.getRandomInt)
     );

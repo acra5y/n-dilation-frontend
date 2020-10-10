@@ -7,8 +7,9 @@ import ErrorMessage from "./ErrorMessage";
 
 const AnimatedContentTransition = styled.div`
     text-align: center;
-    transition: ${props => `opacity ${props.animationTimeInSeconds}s ease-out`};
-    opacity: ${props => props.opacity};
+    transition: ${(props) =>
+        `opacity ${props.animationTimeInSeconds}s ease-out`};
+    opacity: ${(props) => props.opacity};
 `;
 
 export const Result = ({

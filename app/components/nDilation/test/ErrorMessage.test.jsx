@@ -7,7 +7,7 @@ const defaultProps = {
     validationError: false,
 };
 
-const render = overwriteProps =>
+const render = (overwriteProps) =>
     shallow(<ErrorMessage {...defaultProps} {...overwriteProps} />);
 
 describe("ErrorMessage", () => {

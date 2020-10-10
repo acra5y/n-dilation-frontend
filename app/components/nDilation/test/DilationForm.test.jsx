@@ -86,7 +86,7 @@ describe("DilationForm", () => {
         "1,5 -2, 3 4,",
     ];
 
-    inputValues.forEach(inputValue => {
+    inputValues.forEach((inputValue) => {
         it(`should pass value ${inputValue} from textarea and degree to onSubmit`, () => {
             const component = render();
 

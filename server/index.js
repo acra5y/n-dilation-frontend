@@ -28,7 +28,7 @@ server.use(
 
 const memoryCache = cacheManager.caching({ store: "memory" });
 
-const renderPage = cb => {
+const renderPage = (cb) => {
     console.log("rendering page");
     const sheet = new ServerStyleSheet();
     try {
@@ -44,7 +44,7 @@ const renderPage = cb => {
     }
 };
 
-const createResponseHandler = res => (err, html) => {
+const createResponseHandler = (res) => (err, html) => {
     if (err) {
         return res.status(500).send("Internal Server Error");
     }

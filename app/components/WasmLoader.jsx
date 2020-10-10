@@ -8,21 +8,19 @@ const WasmLoader = ({ onLoad, onError }) => {
     useEffect(() => {
         if (!window.Go) {
             const script = document.createElement("script");
-            script.onload = async function() {
+            script.onload = async function () {
                 const go = new window.Go();
                 const webAssembly = await window.WebAssembly.instantiateStreaming(
                     window
                         .fetch("/public/wasm/main.wasm")
-                        .then(response => {
+                        .then((response) => {
                             if (!response.ok)
                                 throw new Error(
-                                    `Could not fetch ${response.url}: ${
-                                        response.status
-                                    }`
+                                    `Could not fetch ${response.url}: ${response.status}`
                                 );
                             return response;
                         })
-                        .catch(e => {
+                        .catch((e) => {
                             onError();
                             throw e;
                         }),

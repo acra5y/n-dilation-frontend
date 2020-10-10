@@ -30,7 +30,7 @@ const getRandomIntCallArgsPerRenderCycle = [
 ];
 
 const createWindow = (
-    setInterval = jest.fn(cb => {
+    setInterval = jest.fn((cb) => {
         cb();
         return "interval-id";
     }),
@@ -41,7 +41,7 @@ const createWindow = (
 });
 
 const createDefaultProps = () => ({
-    getRandomInt: jest.fn().mockImplementation(arg => arg),
+    getRandomInt: jest.fn().mockImplementation((arg) => arg),
 });
 
 const render = (
