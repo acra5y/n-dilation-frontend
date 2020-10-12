@@ -5,12 +5,51 @@ import App from "../App";
 import GlobalStyles from "../GlobalStyles";
 import WindowContext from "../WindowContext";
 import Calculator from "../nDilation/Calculator";
+import UnsupportedBrowserWarning from "../UnsupportedBrowserWarning";
 
 describe("App", () => {
     it("should render Calculator", () => {
         const component = shallow(<App />);
 
         expect(component.find(Calculator).exists()).toBe(true);
+    });
+
+    describe("should render UnsupportedBrowserWarning", () => {
+        const userAgentsForUnsupportedBrowsers = [
+            { userAgent: "...Version/14.0 Safari/605.1.15", desc: "Safari" },
+            { userAgent: "some-text...MSIE...some-text", desc: "IE < 10" },
+        ];
+
+        userAgentsForUnsupportedBrowsers.forEach(({ userAgent, desc }) => {
+            it(`for ${desc}`, () => {
+                const originalUserAgent = window.navigator.userAgent;
+
+                Object.defineProperty(window.navigator, "userAgent", {
+                    value: userAgent,
+                    configurable: true,
+                });
+                const component = shallow(<App />);
+
+                expect(component.find(UnsupportedBrowserWarning).exists()).toBe(
+                    true
+                );
+                Object.defineProperty(window.navigator, "userAgent", {
+                    value: originalUserAgent,
+                    configurable: true,
+                });
+            });
+
+            it("for internet explorer 10 and 11 using documentMode", () => {
+                window.document.documentMode = true;
+
+                const component = shallow(<App />);
+
+                expect(component.find(UnsupportedBrowserWarning).exists()).toBe(
+                    true
+                );
+                Reflect.deleteProperty(window.document, "documentMode");
+            });
+        });
     });
 
     it("should insert global styles", () => {
