@@ -12,9 +12,15 @@ export default (styleTags, app) => `
             ${styleTags}
             <style>
                 @font-face {
-                    src: url('https://fonts.googleapis.com/css?family=Droid+Sans');
-                    font-family: 'Droid Sans', sans-serif;
                     font-display: fallback;
+                    font-family: 'Work Sans';
+                    font-style: normal;
+                    font-weight: 400;
+                    src: local(''),
+                        url('/public/fonts/work-sans-v8-latin-ext_latin-regular.woff2') format('woff2'),
+                        url('/public/fonts/work-sans-v8-latin-ext_latin-regular.woff') format('woff'),
+                        url('/public/fonts/work-sans-v8-latin-ext_latin-regular.ttf') format('truetype'),
+                        url('/public/fonts/work-sans-v8-latin-ext_latin-regular.svg#WorkSans') format('svg');
                 }
                 #root {
                     display: flex;
