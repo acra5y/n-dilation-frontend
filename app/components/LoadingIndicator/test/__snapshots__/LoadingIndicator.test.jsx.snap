@@ -5,36 +5,28 @@ exports[`LoadingIndicator should render initially with a set of symbols 1`] = `
   reverse={true}
 >
   <AnimatedSymbol
-    basis={25}
+    basis={32.333333333333336}
     getRandomInt={[Function]}
     key="loading-0"
-    offsetTop={0.009900990099009901}
+    offsetTop={0.01}
   >
-    ζ
+    j→∞
   </AnimatedSymbol>
   <AnimatedSymbol
-    basis={25}
+    basis={32.333333333333336}
     getRandomInt={[Function]}
     key="loading-1"
-    offsetTop={0.009900990099009901}
+    offsetTop={0.01}
   >
-    ζ
+    j→∞
   </AnimatedSymbol>
   <AnimatedSymbol
-    basis={25}
+    basis={32.333333333333336}
     getRandomInt={[Function]}
     key="loading-2"
-    offsetTop={0.009900990099009901}
+    offsetTop={0.01}
   >
-    ζ
-  </AnimatedSymbol>
-  <AnimatedSymbol
-    basis={25}
-    getRandomInt={[Function]}
-    key="loading-3"
-    offsetTop={0.009900990099009901}
-  >
-    ζ
+    j→∞
   </AnimatedSymbol>
 </LoadingIndicator__LoadingIndicatorWrapper>
 `;

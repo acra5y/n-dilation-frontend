@@ -62,16 +62,14 @@ describe("LoadingIndicator", () => {
         expect(component).toMatchSnapshot();
     });
 
-    it("should use getRandomInt from props for randomization of symbols and their styles", () => {
+    it("should mock getRandomInt from props forinitialization of symbols and their styles to ensure server and client render the same markup", () => {
         const props = createDefaultProps();
         render(props);
 
-        expect(props.getRandomInt.mock.calls).toEqual(
-            getRandomIntCallArgsPerRenderCycle
-        );
+        expect(props.getRandomInt.mock.calls.length).toEqual(0);
     });
 
-    it("should use getRandomInt from props for randomization of symbols and their styles 2s", () => {
+    it("should use getRandomInt from props for randomization of symbols and their style", () => {
         jest.spyOn(AnimatedSymbol, "default").mockImplementation(() => (
             <>mock-component</>
         ));
@@ -90,7 +88,6 @@ describe("LoadingIndicator", () => {
         expect(window.setInterval.mock.calls.length).toEqual(1);
         expect(window.setInterval.mock.calls[0][1]).toEqual(INTERVAL);
         expect(props.getRandomInt.mock.calls).toEqual([
-            ...getRandomIntCallArgsPerRenderCycle,
             ...extraCallForInitialState,
             ...getRandomIntCallArgsPerRenderCycle,
         ]);

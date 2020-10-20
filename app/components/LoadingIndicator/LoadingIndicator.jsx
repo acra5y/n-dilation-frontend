@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import { MAX_SYMBOLS, INTERVAL } from "./constants";
@@ -54,15 +54,17 @@ const LoadingIndicatorWrapper = styled.div`
 `;
 
 const LoadingIndicator = (props) => {
+    const getRandomIntRef = useRef((arg) => arg - 1);
     const [symbols, setSymbols] = useState(
-        getRandomSymbols(props.getRandomInt)
+        getRandomSymbols(getRandomIntRef.current)
     );
     const window = useWindowContext();
 
     useEffect(() => {
         const { setInterval, clearInterval } = window;
+        getRandomIntRef.current = props.getRandomInt;
         const i = setInterval(
-            () => setSymbols(getRandomSymbols(props.getRandomInt)),
+            () => setSymbols(getRandomSymbols(getRandomIntRef.current)),
             INTERVAL
         );
 
@@ -70,10 +72,10 @@ const LoadingIndicator = (props) => {
     }, []);
 
     return (
-        <LoadingIndicatorWrapper reverse={Boolean(props.getRandomInt(2))}>
+        <LoadingIndicatorWrapper reverse={Boolean(getRandomIntRef.current(2))}>
             {symbols.map((symbol, index) => {
-                const basis = props.getRandomInt(100 / symbols.length);
-                const offsetTop = 1 / (props.getRandomInt(100) + 1);
+                const basis = getRandomIntRef.current(100 / symbols.length);
+                const offsetTop = 1 / (getRandomIntRef.current(100) + 1);
 
                 return (
                     <AnimatedSymbol
