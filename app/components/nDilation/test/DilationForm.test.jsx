@@ -100,10 +100,7 @@ describe("DilationForm", () => {
 
             expect(defaultProps.onSubmit.mock.calls.length).toBe(1);
             expect(defaultProps.onSubmit.mock.calls[0][0]).toEqual([
-                1.5,
-                -2,
-                3,
-                4,
+                1.5, -2, 3, 4,
             ]);
             expect(defaultProps.onSubmit.mock.calls[0][1]).toEqual(3);
         });
