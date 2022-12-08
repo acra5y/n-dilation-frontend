@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "cache-manager": "^3.4.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-static-gzip": "^2.1.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
